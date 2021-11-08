@@ -13,4 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'layouts.admin.dashboard');
+Route::prefix('admin')->group(function () {
+    Route::view('dashboard', 'layouts.admin.dashboard')->name('admin.dashboard');
+});
+
+Route::view('/', 'layouts.user.dashboard');
