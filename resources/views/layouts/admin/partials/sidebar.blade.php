@@ -3,7 +3,13 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('assets_admin/images/logo/logo.png') }} " alt="Logo" srcset=""></a>
+                    <a href="{{ route('dashboard') }}" class="text-decoration-none">
+                        <h4>
+                            <i class="bi bi-person-circle"></i>
+                            {{ auth()->user()->name }}
+                        </h4>
+
+                    </a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -48,28 +54,28 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ route('regulasi') }}" class='sidebar-link'>
                         <i class="bi bi-file-ruled-fill"></i>
                         <span>Regulasi</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="application-gallery.html" class='sidebar-link'>
+                    <a href="{{ route('galeri') }}" class='sidebar-link'>
                         <i class="bi bi-image-fill"></i>
                         <span>Galeri Kegiatan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="application-checkout.html" class='sidebar-link'>
+                    <a href="{{ route('berita') }}" class='sidebar-link'>
                         <i class="bi bi-newspaper"></i>
                         <span>Berita</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ route('pengaduan') }}" class='sidebar-link'>
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pengaduan</span>
                     </a>
@@ -77,13 +83,16 @@
 
                 <hr>
 
+                {{-- Selesai Fungsi Logout--}}
                 <li class="sidebar-item  ">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-right text-danger"></i>
-                        <span>Keluar</span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="sidebar-link btn btn-light">
+                            <i class="bi bi-box-arrow-right text-danger"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
                 </li>
-
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
