@@ -29,6 +29,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 
+    // ana ba coba git push ka branch ucup
+
     Route::prefix('pengaduan')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('admin.pengaduan');
     });
