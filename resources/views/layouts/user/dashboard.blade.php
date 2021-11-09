@@ -149,4 +149,98 @@
 
 </section><!-- End Recent Blog Posts Section -->
 
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+
+    <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+            <h2>Satpol PP Bone Bolango</h2>
+            <p>Layanan Pengaduan</p>
+        </header>
+
+        <div class="row gy-4">
+
+            <div class="col-lg-6">
+
+                <div class="row gy-4">
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i class="bi bi-geo-alt"></i>
+                            <h3>Alamat</h3>
+                            <p>Ulantha<br>Suwawa, Gorontalo</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i class="bi bi-telephone"></i>
+                            <h3>Telepon</h3>
+                            <p>+1 5589 55488 55</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i class="bi bi-envelope"></i>
+                            <h3>Email</h3>
+                            <p>info@example.com</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <i class="bi bi-clock"></i>
+                            <h3>Jam Buka</h3>
+                            <p>Senin - Jumat<br>8:00 - 05:00</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <form action="#" method="post" class="php-email-form">
+                    <div class="row gy-4">
+
+                        <div class="col-md-12">
+                            <input type="text" name="name" class="form-control" placeholder="Nama" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text" name="name" class="form-control" placeholder="No. Telpon/WA" required>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" name="name" class="form-control" placeholder="Lokasi Kejadian">
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="subject" placeholder="Judul Aduan">
+                        </div>
+
+                        <div class="col-md-12">
+                            <textarea class="form-control" name="message" rows="6" placeholder="Tuliskan Aduan Anda"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="file" class="form-control" name="subject">
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <button type="submit">Kirim Aduan</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- End Contact Section -->
+
 @endsection
