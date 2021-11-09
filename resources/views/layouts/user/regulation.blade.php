@@ -17,36 +17,59 @@
 </section><!-- End Breadcrumbs -->
 
 <!-- ======= Blog Section ======= -->
-<section id="blog" class="blog">
+<section class="blog">
+
     <div class="container" data-aos="fade-up">
+
         <header class="section-header">
             <h2>Satpol PP Kabupaten Bone Bolango</h2>
             <p>Regulasi</p>
         </header>
 
-        <table class="table table-hover table-responsive align-middle">
-            <thead>
-                <tr>
-                    <td>No. </td>
-                    <td>Nama Dokumen</td>
-                    <td>Deskripsi</td>
-                    <td>Aksi</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1.</td>
-                    <td>Perda</td>
-                    <td>Ini deksripsi dokumen</td>
-                    <td>
-                        <a href="" class="btn btn-primary my-2">Lihat Dokumen</a>
-                        <a href="" class="btn btn-success my-2">Unduh Dokumen</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row gy-4" data-aos="fade-left">
+
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+
+                <article class="entry">
+
+                    <h2 class="entry-title">
+                        <a href="#">Nama Dokumen</a>
+                    </h2>
+
+                    <div class="entry-meta">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Admin</a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="entry-content">
+                        <p>
+                            Deskripsi Dokumen
+                        </p>
+                        <div class="read-more">
+                            <a href="#"><i class="bi bi-eye me-2"></i>Lihat</a>
+                            <a href="#"><i class="bi bi-download me-2"></i>Unduh</a>
+                        </div>
+                    </div>
+
+                </article><!-- End blog entry -->
+
+            </div>
+
+        </div>
+
+        <div class="blog-pagination">
+            <ul class="justify-content-center">
+                <li><a href="#">1</a></li>
+                <li class="active"><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+            </ul>
+        </div>
 
     </div>
-</section><!-- End Blog Section -->
+
+</section>
+<!-- End Blog Section -->
 
 @endsection

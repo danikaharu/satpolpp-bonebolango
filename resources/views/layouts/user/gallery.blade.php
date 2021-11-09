@@ -105,45 +105,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item ">
-                <div class="portfolio-wrap">
-                    <img src="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>App 1</h4>
-                        <p>App</p>
-                        <div class="portfolio-links">
-                            <a href="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item ">
-                <div class="portfolio-wrap">
-                    <img src="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>App 1</h4>
-                        <p>App</p>
-                        <div class="portfolio-links">
-                            <a href="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item ">
-                <div class="portfolio-wrap">
-                    <img src="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>App 1</h4>
-                        <p>App</p>
-                        <div class="portfolio-links">
-                            <a href="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="blog">
