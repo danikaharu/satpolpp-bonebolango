@@ -3,13 +3,13 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
-            <span>FlexStart</span>
+            <img src="{{ asset('assets_user/img/logo.png') }}" alt="logo">
+            <span>SATPOL PP</span>
         </a>
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
+                <li><a href="{{ route('home') }}" class="nav-link scrollto {{ request()->is('/') ? ' active' : '' }}">Beranda</a></li>
                 <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">Profil Instansi</a></li>
@@ -20,9 +20,9 @@
                     </ul>
                 </li>
                 <li><a href="#">Regulasi</a></li>
-                <li class="dropdown"><a href="#"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#" class="nav-link {{ request()->is('article') ? ' active' : '' }}"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">Berita</a></li>
+                        <li><a href="{{ route('article') }}">Berita</a></li>
                         <li><a href="#">Galeri Kegiatan</a></li>
                     </ul>
                 </li>

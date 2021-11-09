@@ -5,8 +5,8 @@
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-info">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <img src="assets/img/logo.png" alt="">
-                        <span>FlexStart</span>
+                        <img src="{{ asset('assets_user/img/logo.png') }}" alt="logo">
+                        <span>SATPOL PP</span>
                     </a>
                     <p>Selamat datang di Website Resmi SATPOL PP Kabupaten Bone Bolango. Website ini sebagai sarana publikasi untuk memberikan Informasi dan gambaran tentang SATPOL PP Kab. Bone Bolango dalam melaksanakan pelayanan informasi.</p>
                     <div class="social-links mt-3">
@@ -41,7 +41,7 @@
 
     <div class="container">
         <div class="copyright">
-            &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Satpol PP Bone Bolango</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
