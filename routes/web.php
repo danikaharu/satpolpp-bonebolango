@@ -48,3 +48,7 @@ Route::get('/', function () {
 Route::view('/berita', 'layouts.user.news')->name('berita');
 
 Route::view('/profil', 'layouts.user.profile')->name('profil');
+
+Route::view('/regulasi', 'layouts.user.regulation')->name('regulasi');
+
+Route::view('/galeri', 'layouts.user.gallery')->name('galeri');
