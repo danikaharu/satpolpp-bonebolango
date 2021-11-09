@@ -19,6 +19,10 @@
 <!-- ======= Blog Section ======= -->
 <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
+        <header class="section-header">
+            <h2>Satpol PP Kabupaten Bone Bolango</h2>
+            <p>Berita</p>
+        </header>
 
         <div class="row">
 
@@ -166,7 +170,7 @@
                         </form>
                     </div><!-- End sidebar search formn-->
 
-                    <h3 class="sidebar-title">Recent Posts</h3>
+                    <h3 class="sidebar-title">Berita Terkini</h3>
                     <div class="sidebar-item recent-posts">
                         <div class="post-item clearfix">
                             <img src="{{ asset('assets_user/img/blog/blog-recent-1.jpg') }}" alt="">

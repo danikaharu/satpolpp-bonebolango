@@ -19,7 +19,12 @@
 <!-- ======= Blog Section ======= -->
 <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
-        <table class="table table-bordered table-hovered">
+        <header class="section-header">
+            <h2>Satpol PP Kabupaten Bone Bolango</h2>
+            <p>Regulasi</p>
+        </header>
+
+        <table class="table table-hover table-responsive align-middle">
             <thead>
                 <tr>
                     <td>No. </td>
@@ -34,17 +39,8 @@
                     <td>Perda</td>
                     <td>Ini deksripsi dokumen</td>
                     <td>
-                        <a href="" class="btn btn-primary">Lihat Dokumen</a>
-                        <a href="" class="btn btn-success">Unduh Dokumen</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2.</td>
-                    <td>Perda</td>
-                    <td>Ini deksripsi dokumen</td>
-                    <td>
-                        <a href="" class="btn btn-primary">Lihat Dokumen</a>
-                        <a href="" class="btn btn-success">Unduh Dokumen</a>
+                        <a href="" class="btn btn-primary my-2">Lihat Dokumen</a>
+                        <a href="" class="btn btn-success my-2">Unduh Dokumen</a>
                     </td>
                 </tr>
             </tbody>
