@@ -17,4 +17,5 @@ Route::prefix('admin')->group(function () {
     Route::view('dashboard', 'layouts.admin.dashboard')->name('admin.dashboard');
 });
 
-Route::view('/', 'layouts.user.dashboard');
+Route::view('/', 'layouts.user.dashboard')->name('home');
+Route::view('/article', 'layouts.user.article')->name('article');
