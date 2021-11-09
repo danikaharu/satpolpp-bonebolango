@@ -26,7 +26,7 @@
                         <li><a href="{{ route('galeri') }}">Galeri Kegiatan</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Pengaduan</a></li>
+                <li><a href="{{ route('pengaduan') }}">Pengaduan</a></li>
                 <li><a class="getstarted" href="{{ route('login') }}">Login</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
