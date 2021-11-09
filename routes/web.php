@@ -21,25 +21,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route Admin
+
+Route::prefix('admin')->group(function () {
+    Route::post('/logout', [LogoutController::class, 'store'])->name('admin.logout');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
+
+    Route::prefix('pengaduan')->group(function () {
+        Route::get('/', [ComplaintController::class, 'index'])->name('admin.pengaduan');
+    });
+
+    Route::get('/regulasi', [RegulationController::class, 'index'])->name('admin.regulasi');
+    Route::get('/berita', [NewsController::class, 'index'])->name('admin.berita');
+    Route::get('/galeri', [GaleryController::class, 'index'])->name('admin.galeri');
+});
+
+
+// Route User
+
 Route::get('/', function () {
     return view('layouts.user.dashboard');
 })->name('home');
 
-Route::prefix('pengaduan')->group(function () {
-    Route::get('/', [ComplaintController::class, 'index'])->name('pengaduan');
-});
-
-Route::get('/regulasi', [RegulationController::class, 'index'])->name('regulasi');
-Route::get('/berita', [NewsController::class, 'index'])->name('berita');
-Route::get('/galeri', [GaleryController::class, 'index'])->name('galeri');
-
-Route::prefix('admin')->group(function () {
-    // disable
-    // Route::view('dashboard', 'layouts.admin.dashboard')->name('admin.dashboard');
-
-    // update
-    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
-});
+Route::view('/berita', 'layouts.user.news')->name('berita');
