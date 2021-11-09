@@ -19,11 +19,11 @@
                         <li><a href="#">Visi & Misi</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Regulasi</a></li>
-                <li class="dropdown"><a href="#" class="nav-link {{ request()->is('berita') ? ' active' : '' }}"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
+                <li><a href="{{ route('regulasi') }}" class="nav-link {{ request()->is('regulasi') ? ' active' : '' }}">Regulasi</a></li>
+                <li class="dropdown"><a href="#" class="nav-link {{ request()->is('berita' || 'galeri') ? ' active' : '' }}"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="{{ route('berita') }}">Berita</a></li>
-                        <li><a href="#">Galeri Kegiatan</a></li>
+                        <li><a href="{{ route('galeri') }}">Galeri Kegiatan</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Pengaduan</a></li>
