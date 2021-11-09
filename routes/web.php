@@ -52,3 +52,5 @@ Route::view('/profil', 'layouts.user.profile')->name('profil');
 Route::view('/regulasi', 'layouts.user.regulation')->name('regulasi');
 
 Route::view('/galeri', 'layouts.user.gallery')->name('galeri');
+
+Route::view('/pengaduan', 'layouts.user.complaint')->name('pengaduan');
