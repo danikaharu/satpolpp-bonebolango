@@ -29,10 +29,10 @@
                                     <form action="{{ route('login') }}" method="post">
                                         @csrf
                                         <div class="form-floating mb-3">
-                                            <input class="form-control @error ('password') border-danger @enderror"
-                                                id="email" type="email" name="email" placeholder="name@example.com" />
-                                            <label for="email">Email address</label>
-                                            @error('email')
+                                            <input class="form-control @error ('username') border-danger @enderror"
+                                                id="username" type="text" name="username" placeholder="username" />
+                                            <label for="username">Username</label>
+                                            @error('username')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

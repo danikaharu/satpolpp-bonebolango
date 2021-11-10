@@ -3,7 +3,7 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="{{ route('dashboard') }}" class="text-decoration-none">
+                    <a href="{{ route('admin.dashboard') }}" class="text-decoration-none">
                         <h4>
                             <i class="bi bi-person-circle"></i>
                             {{ auth()->user()->name }}
@@ -54,28 +54,28 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('regulasi') }}" class='sidebar-link'>
+                    <a href="{{ route('admin.regulasi') }}" class='sidebar-link'>
                         <i class="bi bi-file-ruled-fill"></i>
                         <span>Regulasi</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('galeri') }}" class='sidebar-link'>
+                    <a href="{{ route('galery.index') }}" class='sidebar-link'>
                         <i class="bi bi-image-fill"></i>
                         <span>Galeri Kegiatan</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('berita') }}" class='sidebar-link'>
+                    <a href="{{ route('news.index') }}" class='sidebar-link'>
                         <i class="bi bi-newspaper"></i>
                         <span>Berita</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('pengaduan') }}" class='sidebar-link'>
+                    <a href="{{ route('admin.pengaduan') }}" class='sidebar-link'>
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pengaduan</span>
                     </a>
@@ -85,7 +85,7 @@
 
                 {{-- Selesai Fungsi Logout--}}
                 <li class="sidebar-item  ">
-                    <form action="{{ route('logout') }}" method="post">
+                    <form action="{{ route('admin.logout') }}" method="post">
                         @csrf
                         <button type="submit" class="sidebar-link btn btn-light">
                             <i class="bi bi-box-arrow-right text-danger"></i>

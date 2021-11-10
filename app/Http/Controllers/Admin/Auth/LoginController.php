@@ -42,12 +42,12 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($request->only('email', 'password'), $request->remember)) {
-            return redirect()->route('dashboard');
+        if(Auth::attempt($request->only('username', 'password'))) {
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->with('status', 'Username atau Password Salah');

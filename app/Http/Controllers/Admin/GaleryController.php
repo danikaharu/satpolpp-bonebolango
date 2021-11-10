@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Galery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GaleryController extends Controller
 {
@@ -12,13 +14,17 @@ class GaleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(['auth']);
     }
 
-    public function index() 
+    public function index()
     {
-        return view('layouts.admin.galeri.index');
+        $galeries = Galery::get();
+        return view('layouts.admin.galeri.index', [
+            'galeries' => $galeries
+        ]);
     }
 
     /**
@@ -28,7 +34,7 @@ class GaleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.admin.galeri.create');
     }
 
     /**
@@ -39,7 +45,28 @@ class GaleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $image = $request->file('image');
+        $image->store('galery', 'public');
+
+        $galery = Galery::create([
+            'image' => $image->hashName(),
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
+
+        if ($galery) {
+            // redirect kalau sukses
+            return redirect()->route('galery.index')->with(['success' => 'Data Berhasil Disimpan']);
+        } else {
+            // redirect kalau tidak sukses
+            return redirect()->route('galery.index')->with(['failed' => 'Data Gagal Disimpan']);
+        }
     }
 
     /**
@@ -59,9 +86,9 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Galery $galery)
     {
-        //
+        return view('layouts.admin.galeri.edit',compact('galery'));
     }
 
     /**
@@ -71,9 +98,61 @@ class GaleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Galery $galery)
     {
-        //
+        $this->validate($request, [
+            'title'     => 'required',
+            'body'   => 'required',
+        ]);
+
+        //get data Blog by ID
+        $galery = Galery::findOrFail($galery->id);
+
+        if ($request->file('image') == "") {
+
+            $galery->update([
+                'title'     => $request->title,
+                'body'   => $request->body,
+            ]);
+        } else {
+
+            //hapus old image
+            // Storage::disk('local')->delete('galery/'). $galery->image;
+
+            // hapus image
+            $delete = Galery::findOrFail($galery->id);
+            $file = public_path('storage/galery/') . $delete->image;
+            if (file_exists($file)) {
+                @unlink($file);
+            }
+            // $delete->delete();
+            // batas hapus
+            // $file = public_path('storage/galery/') . $delete->image;
+            Storage::delete($file);
+
+            //upload new image
+            // $image = $request->file('image');
+            // $image->storeAs('public/blogs/', $image->hashName());
+
+            // new
+            $image = $request->file('image');
+            $image->store('galery', 'public');
+
+            $galery->update([
+
+                'title'     => $request->title,
+                'body'   => $request->body,
+                'image'     => $image->hashName(),
+            ]);
+        }
+
+        if ($galery) {
+            //redirect dengan pesan sukses
+            return redirect()->route('galery.index')->with(['success' => 'Data Berhasil Diupdate!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('galery.index')->with(['error' => 'Data Gagal Diupdate!']);
+        }
     }
 
     /**
@@ -84,6 +163,22 @@ class GaleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $directori = storage_path('app/public/galery');
+        // $galery = Galery::findOrFail($id);
+        // Storage::deleteDirectory($directori);
+        // $galery->delete();
+
+        // if ($galery) {
+        //     return redirect()->route('galery.index')->with(['success', 'Data Berhasil Dihapus']);
+        // }else {
+        //     return redirect()->route('galery.index')->with(['error', 'Data Gagal Dihapus']);
+        // }
+        $delete = Galery::findOrFail($id);
+        $file = public_path('storage/galery/') . $delete->image;
+        if (file_exists($file)) {
+            @unlink($file);
+        }
+        $delete->delete();
+        return redirect()->route('galery.index')->with(['success', 'Data Berhasil Dihapus']);
     }
 }

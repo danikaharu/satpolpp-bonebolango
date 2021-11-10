@@ -3,10 +3,12 @@
 @section('title', 'Berita')
 
 @section('content')
-<div class="page-heading">
-    <h3>Berita</h3>
-</div>
-<div class="page-content">
-    <h1>Halaman Berita</h1>
-</div>
+<ol class="breadcrumb mb-4">
+    {{-- <li class="breadcrumb-item">
+        <a href="index.html"><h4>Berita</h5></a>
+    </li> --}}
+    <h4>
+        <li class="breadcrumb-item active">Berita</li>
+    </h4>
+</ol>
 @endsection
