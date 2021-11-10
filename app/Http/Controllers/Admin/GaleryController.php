@@ -105,7 +105,7 @@ class GaleryController extends Controller
             'body'   => 'required',
         ]);
 
-        //get data Blog by ID
+        //get data galery by ID
         $galery = Galery::findOrFail($galery->id);
 
         if ($request->file('image') == "") {
@@ -116,23 +116,13 @@ class GaleryController extends Controller
             ]);
         } else {
 
-            //hapus old image
-            // Storage::disk('local')->delete('galery/'). $galery->image;
-
             // hapus image
             $delete = Galery::findOrFail($galery->id);
             $file = public_path('storage/galery/') . $delete->image;
             if (file_exists($file)) {
                 @unlink($file);
             }
-            // $delete->delete();
-            // batas hapus
-            // $file = public_path('storage/galery/') . $delete->image;
             Storage::delete($file);
-
-            //upload new image
-            // $image = $request->file('image');
-            // $image->storeAs('public/blogs/', $image->hashName());
 
             // new
             $image = $request->file('image');
@@ -163,16 +153,6 @@ class GaleryController extends Controller
      */
     public function destroy($id)
     {
-        // $directori = storage_path('app/public/galery');
-        // $galery = Galery::findOrFail($id);
-        // Storage::deleteDirectory($directori);
-        // $galery->delete();
-
-        // if ($galery) {
-        //     return redirect()->route('galery.index')->with(['success', 'Data Berhasil Dihapus']);
-        // }else {
-        //     return redirect()->route('galery.index')->with(['error', 'Data Gagal Dihapus']);
-        // }
         $delete = Galery::findOrFail($id);
         $file = public_path('storage/galery/') . $delete->image;
         if (file_exists($file)) {

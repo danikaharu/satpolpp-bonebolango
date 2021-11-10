@@ -54,7 +54,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('admin.regulasi') }}" class='sidebar-link'>
+                    <a href="{{ route('regulation.index') }}" class='sidebar-link'>
                         <i class="bi bi-file-ruled-fill"></i>
                         <span>Regulasi</span>
                     </a>
