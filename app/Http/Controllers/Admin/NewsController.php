@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -18,7 +20,10 @@ class NewsController extends Controller
 
     public function index()
     {
-        return view('layouts.admin.berita.index');
+        $news = News::get();
+        return view('layouts.admin.berita.index', [
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -28,7 +33,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.admin.berita.create');
     }
 
     /**
@@ -39,7 +44,28 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+        ]);
+
+        $image = $request->file('image');
+        $image->store('news', 'public');
+
+        $news = News::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'image' => $image->hashName(),
+        ]);
+
+        if ($news) {
+            // redirect kalau sukses
+            return redirect()->route('news.index')->with(['success' => 'Data Berhasil Disimpan']);
+        } else {
+            // redirect kalau tidak sukses
+            return redirect()->route('news.index')->with(['failed' => 'Data Gagal Disimpan']);
+        }
     }
 
     /**
@@ -59,9 +85,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('layouts.admin.berita.edit', compact('news'));
     }
 
     /**
@@ -71,9 +97,50 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        //
+        $this->validate($request, [
+            'title'  => 'required',
+            'body'   => 'required',
+        ]);
+
+        //get data news by ID
+        $news = News::findOrFail($news->id);
+
+        if ($request->file('image') == "") {
+
+            $news->update([
+                'title'  => $request->title,
+                'body'   => $request->body,
+            ]);
+        } else {
+
+            // hapus image
+            $delete = News::findOrFail($news->id);
+            $file = public_path('storage/news/') . $delete->image;
+            if (file_exists($file)) {
+                @unlink($file);
+            }
+            Storage::delete($file);
+
+            // Upload Kembali Data
+            $image = $request->file('image');
+            $image->store('news', 'public');
+
+            $news->update([
+                'title'  => $request->title,
+                'body'   => $request->body,
+                'image'  => $image->hashName(),
+            ]);
+        }
+
+        if ($news) {
+            //redirect dengan pesan sukses
+            return redirect()->route('news.index')->with(['success' => 'Data Berhasil Diupdate!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('news.index')->with(['error' => 'Data Gagal Diupdate!']);
+        }
     }
 
     /**
@@ -84,6 +151,12 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = News::findOrFail($id);
+        $file = public_path('storage/news/') . $delete->image;
+        if (file_exists($file)) {
+            @unlink($file);
+        }
+        $delete->delete();
+        return redirect()->route('news.index')->with(['success', 'Data Berhasil Dihapus']);
     }
 }
