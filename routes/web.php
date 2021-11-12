@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GaleryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RegulationController;
+use App\Http\Controllers\User\RegulationController as UserRegulationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,10 +39,9 @@ Route::prefix('admin')->group(function () {
 
     // fix crud Berita
     Route::resource('news', NewsController::class);
-    
+
     // fix crud Galeri Kegiatan
     Route::resource('galery', GaleryController::class);
-
 });
 
 
@@ -55,7 +55,10 @@ Route::view('/berita', 'layouts.user.news')->name('berita');
 
 Route::view('/profil', 'layouts.user.profile')->name('profil');
 
-Route::view('/regulasi', 'layouts.user.regulation')->name('regulasi');
+Route::get('/regulasi', [UserRegulationController::class, 'index'])->name('regulasi');
+
+// ROUTE DOWNLOAD PDF 
+Route::get('/download/{regulation:id}', [UserRegulationController::class, 'download']);
 
 Route::view('/galeri', 'layouts.user.gallery')->name('galeri');
 
