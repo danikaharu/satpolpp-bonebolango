@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Regulation;
 use Illuminate\Http\Request;
 
 class RegulationController extends Controller
@@ -12,13 +13,17 @@ class RegulationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(['auth']);
     }
 
     public function index()
     {
-        return view('layouts.admin.regulasi.index');
+        $regulation = Regulation::get();
+        return view('layouts.admin.regulasi.index', [
+            'regulation' => $regulation,
+        ]);
     }
 
     /**
@@ -28,7 +33,7 @@ class RegulationController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.admin.regulasi.create');
     }
 
     /**
@@ -39,7 +44,26 @@ class RegulationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // dd($request);
+
+        $this->validate($request, [
+            'title' => 'required|unique:regulations|min:5',
+            'description' => 'required|min:5',
+            'document' => 'required|mimes:pdf',
+        ]);
+
+        $data = new Regulation();
+
+        $document = $request->document;
+        $filename = time() . '.' . $document->getClientOriginalExtension();
+        $request->document->move(public_path('storage/regulation/'), $filename);
+        $data->document = $filename;
+        $data->title = $request->title;
+        $data->description = $request->description;
+
+        $data->save();
+        return redirect()->route('regulation.index')->with(['success', 'Berhasil Upload Dokumen']);
     }
 
     /**
@@ -59,9 +83,9 @@ class RegulationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Regulation $regulation)
     {
-        //
+        return view('layouts.admin.regulasi.edit', compact('regulation'));
     }
 
     /**
@@ -71,9 +95,53 @@ class RegulationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Regulation $regulation)
     {
-        //
+
+        //get data news by ID
+        $regulation = Regulation::findOrFail($regulation->id);
+
+        if ($request->file('document') == "") {
+            $this->validate($request, [
+                'title' => 'required|min:5',
+                'description' => 'required|min:5',
+            ]);
+
+            $regulation->update([
+                'title'  => $request->title,
+                'description' => $request->description,
+            ]);
+        } else {
+
+            $this->validate($request, [
+                'title' => 'required|min:5',
+                'description' => 'required|min:5',
+                'document' => 'required|mimes:pdf',
+            ]);
+
+            // hapus dokuemnt
+            $delete = Regulation::findOrFail($regulation->id);
+            $file = public_path('storage/regulation/') . $delete->document;
+            if (file_exists($file)) {
+                @unlink($file);
+            }
+            $delete->delete();
+
+            // upload kembali dokumen
+            $data = new Regulation();
+
+            $document = $request->document;
+            $filename = time() . '.' . $document->getClientOriginalExtension();
+            $request->document->move(public_path('storage/regulation/'), $filename);
+
+            $data->document = $filename;
+            $data->title = $request->title;
+            $data->description = $request->description;
+
+            $data->update();
+        }
+
+        return redirect()->route('regulation.index')->with(['success', 'Berhasil Upload Dokumen']);
     }
 
     /**
@@ -84,6 +152,12 @@ class RegulationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Regulation::findOrFail($id);
+        $file = public_path('storage/regulation/') . $delete->document;
+        if (file_exists($file)) {
+            @unlink($file);
+        }
+        $delete->delete();
+        return redirect()->route('regulation.index')->with(['success', 'Data Berhasil Dihapus']);
     }
 }

@@ -33,6 +33,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('admin.pengaduan');
     });
 
+    // fix crud regulasi
     Route::resource('regulation', RegulationController::class);
 
     // fix crud Berita
