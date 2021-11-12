@@ -19,7 +19,7 @@
                         @csrf
                         @method('put')
                         <div class="form-group">
-                            <label class="font-weight-bold">Judul</label>
+                            <label class="font-weight-bold">Judul Berita</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $news->title) }}" placeholder="Judul Galeri Kegiatan">
                         
                             <!-- error message untuk title -->
@@ -31,8 +31,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="font-weight-bold">Isi</label>
-                            <textarea class="form-control @error('body') is-invalid @enderror" name="body" rows="10" placeholder="Masukan Isi Berita">{{ old('body', $news->body) }}</textarea>
+                            <label class="font-weight-bold">Isi Berita</label>
+                            <textarea id="summernote" class="form-control @error('body') is-invalid @enderror" name="body" rows="10" placeholder="Masukan Isi Berita">{{ old('body', $news->body) }}</textarea>
                         
                             <!-- error message untuk body(isi) -->
                             @error('body')
@@ -62,3 +62,20 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets_admin/summernote/summernote.min.css') }}">
+@endpush
+@push('scripts')
+<script src="{{ asset('assets_admin/summernote/summernote.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#summernote').summernote({
+            height: 300,
+            placeholder: 'Harap Masukan Isi Berita',
+            min: 5,
+        });
+    });
+</script>
+
+@endpush

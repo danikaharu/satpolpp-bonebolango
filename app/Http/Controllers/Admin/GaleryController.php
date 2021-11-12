@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Galery;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 
 class GaleryController extends Controller
@@ -51,13 +52,36 @@ class GaleryController extends Controller
             'body' => 'required',
         ]);
 
+        // summernote save image
+        $dom = new \DOMDocument();
+        $dom->loadHTML($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                // preg_match('/data:image\/(?.*?)\;/',$src,$groups);
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $filename = uniqid();
+                $filepath = ("storage/galery/image/$filename.$mimetype");
+
+                $image = Image::make($src)->encode($mimetype, 100)->save(public_path($filepath));
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            }
+        }
+        // batas
+
         $image = $request->file('image');
         $image->store('galery', 'public');
 
         $galery = Galery::create([
-            'image' => $image->hashName(),
             'title' => $request->title,
-            'body' => $request->body,
+            'body' => $dom->saveHTML(),
+            'image' => $image->hashName(),
         ]);
 
         if ($galery) {
@@ -105,14 +129,37 @@ class GaleryController extends Controller
             'body'   => 'required',
         ]);
 
+        // summernote save image
+        $dom = new \DOMDocument();
+        $dom->loadHTML($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                // preg_match('/data:image\/(?.*?)\;/',$src,$groups);
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $filename = uniqid();
+                $filepath = ("storage/galery/image/$filename.$mimetype");
+
+                $image = Image::make($src)->encode($mimetype, 100)->save(public_path($filepath));
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            }
+        }
+        // batas
+
         //get data galery by ID
         $galery = Galery::findOrFail($galery->id);
 
         if ($request->file('image') == "") {
 
             $galery->update([
-                'title'     => $request->title,
-                'body'   => $request->body,
+                'title'  => $request->title,
+                'body'   => $dom->saveHTML(),
             ]);
         } else {
 
@@ -131,7 +178,7 @@ class GaleryController extends Controller
             $galery->update([
 
                 'title'     => $request->title,
-                'body'   => $request->body,
+                'body'   => $dom->saveHTML(),
                 'image'     => $image->hashName(),
             ]);
         }
