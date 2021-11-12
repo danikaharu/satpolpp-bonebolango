@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\News;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
@@ -14,7 +15,8 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(['auth']);
     }
 
@@ -33,6 +35,8 @@ class NewsController extends Controller
      */
     public function create()
     {
+        
+
         return view('layouts.admin.berita.create');
     }
 
@@ -45,17 +49,42 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
+            'title' => 'required|unique:news|min:5',
+            'body' => 'required|min:5',
             'image' => 'required|image|mimes:png,jpg,jpeg',
         ]);
+
+        // summernote save image
+
+        $dom = new \DOMDocument();
+        $dom->loadHTML($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                // preg_match('/data:image\/(?.*?)\;/',$src,$groups);
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $filename = uniqid();
+                $filepath = ("storage/news/image/$filename.$mimetype");
+
+                $image = Image::make($src)->encode($mimetype, 100)->save(public_path($filepath));
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            }
+        }
+
+        // batas
 
         $image = $request->file('image');
         $image->store('news', 'public');
 
         $news = News::create([
             'title' => $request->title,
-            'body' => $request->body,
+            'body' => $dom->saveHTML(),
             'image' => $image->hashName(),
         ]);
 
@@ -104,14 +133,41 @@ class NewsController extends Controller
             'body'   => 'required',
         ]);
 
+        // summernote save image
+
+        $dom = new \DOMDocument();
+        $dom->loadHTML($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                // preg_match('/data:image\/(?.*?)\;/',$src,$groups);
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimetype = $groups['mime'];
+                $filename = uniqid();
+                $filepath = ("storage/news/image/$filename.$mimetype");
+
+                $image = Image::make($src)->encode($mimetype, 100)->save(public_path($filepath));
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            }
+        }
+
+        // batas
+
         //get data news by ID
         $news = News::findOrFail($news->id);
+
+
 
         if ($request->file('image') == "") {
 
             $news->update([
                 'title'  => $request->title,
-                'body'   => $request->body,
+                'body' => $dom->saveHTML(),
             ]);
         } else {
 
@@ -129,7 +185,7 @@ class NewsController extends Controller
 
             $news->update([
                 'title'  => $request->title,
-                'body'   => $request->body,
+                'body'   => $dom->saveHTML(),
                 'image'  => $image->hashName(),
             ]);
         }

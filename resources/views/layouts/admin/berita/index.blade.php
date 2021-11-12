@@ -15,8 +15,8 @@
         <tr class="text-center">
             <th>No</th>
             <th>Gambar</th>
-            <th>Judl</th>
-            <th>Isi</th>
+            <th>Judul Berita</th>
+            <th>Isi Berita</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -29,7 +29,7 @@
                 <img src="{{ Storage::url('news/'.$item->image) }}" class="rounded" style="height: 150px">
             </td>
             <td>{{$item->title}}</td>
-            <td>{{$item->body}}</td>
+            <td>{!!Str::limit($item->body,20)!!}</td>
             <td>
                 
                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('news.destroy', $item->id) }}" method="POST">

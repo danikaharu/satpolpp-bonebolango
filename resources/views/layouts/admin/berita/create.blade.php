@@ -32,7 +32,8 @@
 
                         <div class="form-group">
                             <label class="font-weight-bold">Isi Berita</label>
-                            <textarea class="form-control @error('body') is-invalid @enderror" name="body" rows="10" placeholder="Masukan Isi Berita">{{ old('body') }}</textarea>
+                            <textarea id="summernote" class="form-control @error('body') is-invalid @enderror"
+                                name="body" rows="4" placeholder="Masukan Isi Berita">{{ old('body') }}</textarea>
 
                             <!-- error message untuk body(isi) -->
                             @error('body')
@@ -62,3 +63,19 @@
     </div>
 </div>
 @endsection
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets_admin/summernote/summernote.min.css') }}">
+@endpush
+@push('scripts')
+<script src="{{ asset('assets_admin/summernote/summernote.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $('#summernote').summernote({
+            height: 300,
+            placeholder: 'Harap Masukan Isi Berita',
+            insertText: 'Hello World'
+        });
+    });
+</script>
+
+@endpush

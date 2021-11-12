@@ -16,8 +16,8 @@
         <tr class="text-center">
             <th>No</th>
             <th>Gambar</th>
-            <th>Judl</th>
-            <th>Isi</th>
+            <th>Judul Galeri</th>
+            <th>Isi Galeri</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -30,11 +30,7 @@
                 <img src="{{ Storage::url('galery/'.$item->image) }}" class="rounded" style="height: 150px">
             </td>
             <td>{{$item->title}}</td>
-            <td>{{$item->body}}</td>
-            {{-- <td>
-                <a href="#" style="text-decoration: underline">Update</a>
-                <a href="{{ route('galery.destroy') }}" style="text-decoration: underline">Delete</a>
-            </td> --}}
+            <td>{!! Str::limit($item->body,20) !!}</td>
             <td>
                 
                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('galery.destroy', $item->id) }}" method="POST">

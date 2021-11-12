@@ -9,6 +9,7 @@
 
     {{-- Styles --}}
     @include('layouts.admin.partials.styles')
+    @stack('styles')
 </head>
 
 <body>
@@ -27,6 +28,7 @@
         </div>
     </div>
     @include('layouts.admin.partials.scripts')
+    @stack('scripts')
 </body>
 
 </html>
