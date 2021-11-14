@@ -28,44 +28,47 @@
 
         <div class="row gy-4" data-aos="fade-left">
 
+            @if(!$regulation->isEmpty())
+            @foreach ($regulation as $data)
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
 
                 <article class="entry">
 
                     <h2 class="entry-title">
-                        <a href="#">Nama Dokumen</a>
+                        <a href="#">{{ $data->title }}</a>
                     </h2>
 
                     <div class="entry-meta">
                         <ul>
-                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Admin</a></li>
-                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">Admin</a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="{{ $data->created_at->format('d M Y') }}">{{ $data->created_at->format('d M Y') }}</time></a></li>
                         </ul>
                     </div>
 
                     <div class="entry-content">
                         <p>
-                            Deskripsi Dokumen
+                            {{ $data->description }}
                         </p>
                         <div class="read-more">
-                            <a href="#"><i class="bi bi-eye me-2"></i>Lihat</a>
-                            <a href="#"><i class="bi bi-download me-2"></i>Unduh</a>
+                            <a href="{{ Storage::url('regulation/'.$data->document) }}" target="pdf-frame"><i class="bi bi-eye me-2"></i>Lihat</a>
+                            <a href="/download/{{ $data->id }}"><i class="bi bi-download me-2"></i>Unduh</a>
                         </div>
                     </div>
 
                 </article><!-- End blog entry -->
 
             </div>
+            @endforeach
+
+            @else
+            <h2>Maaf, data tidak ada<h1>
+                    @endif
+
+
 
         </div>
 
-        <div class="blog-pagination">
-            <ul class="justify-content-center">
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-            </ul>
-        </div>
+        {{ $regulation->links('vendor.pagination.custom') }}
 
     </div>
 
