@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GaleryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RegulationController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,31 @@ Route::prefix('admin')->group(function () {
     Route::prefix('pengaduan')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('admin.pengaduan');
     });
+
+    // profile Profile instansi
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
+
+    // profile Visi Misi
+    Route::get('visionmission', [ProfileController::class, 'visionmission'])->name('visionmission.index');
+    Route::get('visionmission/{profile}/edit', [ProfileController::class, 'editvisionmission'])->name('visionmission.edit');
+    Route::put('visionmission/{profile}', [ProfileController::class, 'updatevisionmission'])->name('visionmission.update');
+
+    // profile tupoksi
+    Route::get('tupoksi', [ProfileController::class, 'tupoksi'])->name('tupoksi.index');
+    Route::get('tupoksi/{profile}/edit', [ProfileController::class, 'edittupoksi'])->name('tupoksi.edit');
+    Route::put('tupoksi/{profile}', [ProfileController::class, 'updatetupoksi'])->name('tupoksi.update');
+
+    // profile unit dan jabatan
+    Route::get('unitjabatan', [ProfileController::class, 'unitjabatan'])->name('unitjabatan.index');
+    Route::get('unitjabatan/{profile}/edit', [ProfileController::class, 'editunitjabatan'])->name('unitjabatan.edit');
+    Route::put('unitjabatan/{profile}', [ProfileController::class, 'updateunitjabatan'])->name('unitjabatan.update');
+
+    // profile struktur
+    Route::get('struktur', [ProfileController::class, 'struktur'])->name('struktur.index');
+    Route::get('struktur/{profile}/edit', [ProfileController::class, 'editstruktur'])->name('struktur.edit');
+    Route::put('struktur/{profile}', [ProfileController::class, 'updatestruktur'])->name('struktur.update');
 
     // fix crud regulasi
     Route::resource('regulation', RegulationController::class);

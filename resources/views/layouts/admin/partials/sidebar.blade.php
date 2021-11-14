@@ -36,19 +36,19 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="#">Profil Instansi</a>
+                            <a href="{{ route('profile.index') }}">Profil Instansi</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="#">Struktur Organisasi</a>
+                            <a href="{{ route('struktur.index') }}">Struktur Organisasi</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="#">Tugas Pokok & Fungsi</a>
+                            <a href="{{ route('tupoksi.index') }}">Tugas Pokok & Fungsi</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="#">Unit & Jabatan</a>
+                            <a href="{{ route('unitjabatan.index') }}">Unit & Jabatan</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="#">Visi & Misi</a>
+                            <a href="{{ route('visionmission.index') }}">Visi & Misi</a>
                         </li>
                     </ul>
                 </li>
