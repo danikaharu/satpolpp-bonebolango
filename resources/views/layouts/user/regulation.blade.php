@@ -62,9 +62,10 @@
 
         </div>
 
-        <div class="justify-content-center">
+        {{ $regulation->links('vendor.pagination.custom') }}
+        {{-- <div class="justify-content-center">
             {{ $regulation->links('vendor.pagination.bootstrap-4') }}
-        </div>
+    </div> --}}
 
     </div>
 
