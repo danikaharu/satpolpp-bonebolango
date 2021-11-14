@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GaleryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RegulationController;
+use App\Http\Controllers\User\NewsController as UserNewsController;
 use App\Http\Controllers\User\RegulationController as UserRegulationController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,7 +52,7 @@ Route::get('/', function () {
     return view('layouts.user.dashboard');
 })->name('home');
 
-Route::view('/berita', 'layouts.user.news')->name('berita');
+Route::get('/berita', [UserNewsController::class, 'index'])->name('berita');
 
 Route::view('/profil', 'layouts.user.profile')->name('profil');
 
