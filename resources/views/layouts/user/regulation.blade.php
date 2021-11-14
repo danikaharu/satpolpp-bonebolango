@@ -28,6 +28,7 @@
 
         <div class="row gy-4" data-aos="fade-left">
 
+            @if(!$regulation->isEmpty())
             @foreach ($regulation as $data)
             <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
 
@@ -39,8 +40,8 @@
 
                     <div class="entry-meta">
                         <ul>
-                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Admin</a></li>
-                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="{{ $data->created_at->format('d M Y') }}">{{ $data->created_at->format('d M Y') }}</time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">Admin</a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="{{ $data->created_at->format('d M Y') }}">{{ $data->created_at->format('d M Y') }}</time></a></li>
                         </ul>
                     </div>
 
@@ -59,13 +60,15 @@
             </div>
             @endforeach
 
+            @else
+            <h2>Maaf, data tidak ada<h1>
+                    @endif
+
+
 
         </div>
 
         {{ $regulation->links('vendor.pagination.custom') }}
-        {{-- <div class="justify-content-center">
-            {{ $regulation->links('vendor.pagination.bootstrap-4') }}
-    </div> --}}
 
     </div>
 
