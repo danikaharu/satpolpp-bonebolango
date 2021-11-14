@@ -7,7 +7,7 @@
 <ol class="breadcrumb mb-4">
     <h4>
         <li class="breadcrumb-item active fon">Galeri Kegiatan</li>
-        </h5>
+    </h4>
 </ol>
 
 <a href="{{ route('galery.create') }}" class="btn btn-primary mb-4">Tambah Galeri</a>
@@ -32,8 +32,9 @@
             <td>{{$item->title}}</td>
             <td>{!! Str::limit($item->body,20) !!}</td>
             <td>
-                
-                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('galery.destroy', $item->id) }}" method="POST">
+
+                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                    action="{{ route('galery.destroy', $item->id) }}" method="POST">
                     <a href="{{ route('galery.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')

@@ -62,7 +62,6 @@
     </div>
 </div>
 @endsection
-
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets_admin/summernote/summernote.min.css') }}">
 @endpush
