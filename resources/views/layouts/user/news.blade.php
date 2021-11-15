@@ -1,6 +1,6 @@
 @extends('layouts.user.master')
 
-@section('title')Artikel @endsection
+@section('title')Berita @endsection
 
 @section('content')
 <!-- ======= Breadcrumbs ======= -->
@@ -9,9 +9,9 @@
 
         <ol>
             <li><a href="index.html">Beranda</a></li>
-            <li>Artikel</li>
+            <li>Berita</li>
         </ol>
-        <h2>Artikel</h2>
+        <h2>Berita</h2>
 
     </div>
 </section><!-- End Breadcrumbs -->
@@ -22,16 +22,16 @@
 
         <div class="row">
 
-            <div class="col-lg-8 entries">
-                @foreach ($news as $data)
+            <div class="col-lg-7 entries">
+                @foreach ($news1 as $data)
                 <article class="entry">
 
                     <div class="entry-img">
-                        <img src="{{ asset('assets_user/img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
+                        <img src="{{ Storage::url('news/'.$data->image) }}" alt="{{ $data->title }}" class="img-fluid">
                     </div>
 
                     <h2 class="entry-title">
-                        <a href="#">{{ $data->title }}</a>
+                        <a href="{{ route('berita.detail', $data->slug) }}">{{ $data->title }}</a>
                     </h2>
 
                     <div class="entry-meta">
@@ -46,18 +46,16 @@
                             {{ Illuminate\Support\Str::words(strip_tags($data->body) , 50) }}
                         </p>
                         <div class="read-more">
-                            <a href="#">Selengkapnya</a>
+                            <a href="{{ route('berita.detail', $data->slug) }}">Selengkapnya</a>
                         </div>
                     </div>
 
                 </article><!-- End blog entry -->
                 @endforeach
-
-                {{ $news->links('vendor.pagination.custom') }}
-
+                {{ $news1->links('vendor.pagination.custom') }}
             </div><!-- End blog entries list -->
 
-            <div class="col-lg-4">
+            <div class="col-lg-5">
 
                 <div class="sidebar">
 
@@ -71,9 +69,9 @@
 
                     <h3 class="sidebar-title">Berita Terkini</h3>
                     <div class="sidebar-item recent-posts">
-                        @foreach ($news as $data)
+                        @foreach ($news2 as $data)
                         <div class="post-item clearfix">
-                            <img src="{{ asset('assets_user/img/blog/blog-recent-1.jpg') }}" alt="">
+                            <img src="{{ Storage::url('news/'.$data->image) }}" alt="{{ $data->title }}">
                             <h4><a href="#">{{ $data->title }}</a></h4>
                             <time datetime="{{ $data->created_at->format('d M Y H:i') }}">{{ $data->created_at->format('d M Y H:i') }}</time>
                         </div>
