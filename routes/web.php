@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RegulationController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\User\GalleryController;
 use App\Http\Controllers\User\NewsController as UserNewsController;
+use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\User\RegulationController as UserRegulationController;
 use App\Models\Admin\Profile;
 use Illuminate\Support\Facades\Route;
@@ -38,9 +39,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('admin.pengaduan');
     });
 
-    Route::get('/profile/{slug}', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/{slug}', [ProfileController::class, 'show'])->name('admin.profile.show');
+    Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('admin.profile.update');
+    Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
 
     // profile Profile instansi
     // Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -86,7 +87,7 @@ Route::get('/', function () {
 
 Route::get('/berita', [UserNewsController::class, 'index'])->name('berita');
 
-Route::view('/profil', 'layouts.user.profile')->name('profil');
+Route::get('/profil/{profile}', [UserProfileController::class, 'index'])->name('profil');
 
 Route::get('/regulasi', [UserRegulationController::class, 'index'])->name('regulasi');
 
