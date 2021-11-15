@@ -16,6 +16,7 @@ class CreateRegulationsTable extends Migration
         Schema::create('regulations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->text('description');
             $table->string('document');
             $table->timestamps();
