@@ -15,4 +15,9 @@ class Regulation extends Model
         'description',
         'document',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

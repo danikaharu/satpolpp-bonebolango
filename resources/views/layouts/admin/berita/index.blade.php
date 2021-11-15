@@ -31,9 +31,10 @@
             <td>{{$item->title}}</td>
             <td>{!!Str::limit($item->body,20)!!}</td>
             <td>
-                
-                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('news.destroy', $item->id) }}" method="POST">
-                    <a href="{{ route('news.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+
+                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('news.destroy', $item->id) }}"
+                    method="POST">
+                    <a href="{{ route('news.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
