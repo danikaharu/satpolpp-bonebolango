@@ -16,9 +16,10 @@ class RegulationController extends Controller
         ]);
     }
 
-    public function download($id)
+    public function download($slug)
     {
-        $regulation = Regulation::findOrFail($id);
+        $regulation = Regulation::where('slug', $slug)->first();
+
         $file = $regulation->document;
 
         if (Storage::disk('download')->exists($file)) {
