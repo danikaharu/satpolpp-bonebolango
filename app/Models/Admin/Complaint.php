@@ -5,19 +5,19 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class Complaint extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'name',
+        'email',
         'title',
-        'slug',
-        'body',
-        'image',
+        'description',
+        'status',
     ];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
+    public function response() {
+        return $this->hasOne(Response::class, 'complaint_id', 'complaint_id');
     }
 }

@@ -35,7 +35,7 @@
 
                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                     action="{{ route('regulation.destroy', $item->id) }}" method="POST">
-                    <a href="{{ route('regulation.edit', $item->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                    <a href="{{ route('regulation.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

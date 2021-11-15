@@ -6,17 +6,17 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Response extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'slug',
-        'content',
+        'complaint_id',
+        'response',
+        'user_id',
     ];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
+}
