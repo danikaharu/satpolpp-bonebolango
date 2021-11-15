@@ -14,7 +14,7 @@
     <thead>
         <tr class="text-center">
             <th>No</th>
-            <th>Document</th>
+            {{-- <th>Document</th> --}}
             <th>Judul Regulasi</th>
             <th>Deskripsi</th>
             <th>Aksi</th>
@@ -25,16 +25,18 @@
 
         <tr class="text-center">
             <td>{{$v += 1}}</td>
-            <td>
+            {{-- <td>
                 <iframe src="{{ Storage::url('regulation/'.$item->document) }}" frameborder="0"
                     style="width:100%;min-height:250px;"></iframe>
-            </td>
+            </td> --}}
             <td>{{$item->title}}</td>
-            <td>{!! Str::limit($item->description,20) !!}</td>
+            <td>{!! Str::limit($item->description,50) !!}</td>
             <td>
 
                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                     action="{{ route('regulation.destroy', $item->id) }}" method="POST">
+                    <a href="{{ Storage::url('regulation/'.$item->document) }}" target="pdf-frame" class="btn btn-sm btn-info">Lihat</a>
+                    {{-- <a href="{{ route('regulation.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a> --}}
                     <a href="{{ route('regulation.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')

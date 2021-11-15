@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Complaint;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
@@ -12,11 +13,19 @@ class ComplaintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth']);
+    // }
+
     public function index()
     {
-        //
+        $complaint = Complaint::all();
+        // dd($complaint);
+        return view('layouts.admin.pengaduan.index', [
+            'complaint' => $complaint
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *

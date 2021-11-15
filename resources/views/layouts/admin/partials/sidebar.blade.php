@@ -65,7 +65,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="{{ route('admin.pengaduan') }}" class='sidebar-link'>
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pengaduan</span>
                     </a>
