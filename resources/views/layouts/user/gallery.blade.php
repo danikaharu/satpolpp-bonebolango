@@ -31,11 +31,11 @@
             @foreach ($gallery as $data)
             <div class="col-lg-4 col-md-6 portfolio-item ">
                 <div class="portfolio-wrap">
-                    <img src="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
+                    <img src="{{ Storage::url('galery/'.$data->image) }}" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>{{ $data->title }}</h4>
                         <div class="portfolio-links">
-                            <a href="{{ asset('assets_user/img/portfolio/portfolio-1.jpg') }}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="{{ $data->title }}"><i class="bi bi-plus"></i></a>
+                            <a href="{{ Storage::url('galery/'.$data->image) }}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="{{ $data->title }}"><i class="bi bi-plus"></i></a>
                         </div>
                     </div>
                 </div>
