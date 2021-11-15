@@ -35,9 +35,9 @@
                         <span>Profil</span>
                     </a>
                     <ul class="submenu ">
-                        @foreach ($data as $data)
+                        @foreach ($profile as $data)
                         <li class="submenu-item ">
-                            <a href="{{ route('profile.show', $data->slug) }}">{{ $data->title }}</a>
+                            <a href="{{ route('admin.profile.show', $data->slug) }}">{{ $data->title }}</a>
                         </li>
                         @endforeach
                     </ul>
