@@ -116,33 +116,16 @@
 
         <div class="row">
 
+            @foreach ($news as $data)
             <div class="col-lg-4">
                 <div class="post-box">
-                    <div class="post-img"><img src="{{ asset('assets_user/img/blog/blog-1.jpg') }}" class="img-fluid" alt=""></div>
-                    <span class="post-date">Tue, September 15</span>
-                    <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit</h3>
-                    <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                    <div class="post-img"><img src="{{ Storage::url('news/'.$data->image) }}" class="img-fluid" alt=""></div>
+                    <span class="post-date">{{ $data->created_at->format('d M Y H:i') }}</span>
+                    <h3 class="post-title">{{ $data->title }}</h3>
+                    <a href="{{ route('berita.detail', $data->slug) }}" class="readmore stretched-link mt-auto"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
-
-            <div class="col-lg-4">
-                <div class="post-box">
-                    <div class="post-img"><img src="{{ asset('assets_user/img/blog/blog-2.jpg') }}" class="img-fluid" alt=""></div>
-                    <span class="post-date">Fri, August 28</span>
-                    <h3 class="post-title">Et repellendus molestiae qui est sed omnis voluptates magnam</h3>
-                    <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="post-box">
-                    <div class="post-img"><img src="{{ asset('assets_user/img/blog/blog-3.jpg') }}" class="img-fluid" alt=""></div>
-                    <span class="post-date">Mon, July 11</span>
-                    <h3 class="post-title">Quia assumenda est et veritatis aut quae</h3>
-                    <a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-                </div>
-            </div>
-
+            @endforeach
         </div>
 
     </div>
