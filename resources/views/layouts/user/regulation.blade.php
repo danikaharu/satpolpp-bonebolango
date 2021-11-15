@@ -51,7 +51,7 @@
                         </p>
                         <div class="read-more">
                             <a href="{{ Storage::url('regulation/'.$data->document) }}" target="pdf-frame"><i class="bi bi-eye me-2"></i>Lihat</a>
-                            <a href="/download/{{ $data->id }}"><i class="bi bi-download me-2"></i>Unduh</a>
+                            <a href="/download/{{ $data->slug }}"><i class="bi bi-download me-2"></i>Unduh</a>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
             @endforeach
 
             @else
-            <h2>Maaf, data tidak ada<h1>
+            <h2 class="my-2">Maaf, data tidak ada<h2>
                     @endif
 
 
