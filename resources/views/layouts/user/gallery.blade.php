@@ -28,6 +28,7 @@
 
         <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
+            @if (!$gallery->isEmpty())
             @foreach ($gallery as $data)
             <div class="col-lg-4 col-md-6 portfolio-item ">
                 <div class="portfolio-wrap">
@@ -41,8 +42,12 @@
                 </div>
             </div>
             @endforeach
+            @else
+            <h2 class="my-2">Maaf, data tidak ada<h2>
+                    @endif
 
-            {{ $gallery->links('vendor.pagination.custom') }}
+
+                    {{ $gallery->links('vendor.pagination.custom') }}
 
 
 </section><!-- End Portfolio Section -->
