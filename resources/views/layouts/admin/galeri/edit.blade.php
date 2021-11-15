@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Galeri Kegiatan')
+@section('title', 'Edit Galeri Kegiatan | Admin Satpol PP Bone Bolango')
 
 @section('content')
 <ol class="breadcrumb mb-4">

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Regulasi')
+@section('title', 'Regulasi | Admin Satpol PP Bone Bolango')
 
 @section('content')
 <ol class="breadcrumb mb-4">
@@ -26,15 +26,13 @@
         <tr class="text-center">
             <td>{{$v += 1}}</td>
             <td>
-                <iframe src="{{ Storage::url('regulation/'.$item->document) }}" frameborder="0"
-                    style="width:100%;min-height:250px;"></iframe>
+                <iframe src="{{ Storage::url('regulation/'.$item->document) }}" frameborder="0" style="width:100%;min-height:250px;"></iframe>
             </td>
             <td>{{$item->title}}</td>
             <td>{!! Str::limit($item->description,20) !!}</td>
             <td>
 
-                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                    action="{{ route('regulation.destroy', $item->id) }}" method="POST">
+                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('regulation.destroy', $item->id) }}" method="POST">
                     <a href="{{ route('regulation.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')

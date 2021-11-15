@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Berita')
+@section('title', 'Tambah Berita | Admin Satpol PP Bone Bolango')
 
 @section('content')
 <ol class="breadcrumb mb-4">
@@ -19,8 +19,7 @@
                         @csrf
                         <div class="form-group">
                             <label class="font-weight-bold">Judul Berita</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
-                                value="{{ old('title') }}" placeholder="Masukan Judul Berita">
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Masukan Judul Berita">
 
                             <!-- error message untuk title -->
                             @error('title')
@@ -32,8 +31,7 @@
 
                         <div class="form-group">
                             <label class="font-weight-bold">Isi Berita</label>
-                            <textarea id="summernote" class="form-control @error('body') is-invalid @enderror"
-                                name="body" rows="4" placeholder="Masukan Isi Berita">{{ old('body') }}</textarea>
+                            <textarea id="summernote" class="form-control @error('body') is-invalid @enderror" name="body" rows="4" placeholder="Masukan Isi Berita">{{ old('body') }}</textarea>
 
                             <!-- error message untuk body(isi) -->
                             @error('body')
@@ -69,13 +67,14 @@
 @push('scripts')
 <script src="{{ asset('assets_admin/summernote/summernote.min.js') }}"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $('#summernote').summernote({
-            height: 300,
-            placeholder: 'Harap Masukan Isi Berita',
-            insertText: 'Hello World'
+            height: 300
+            , placeholder: 'Harap Masukan Isi Berita'
+            , insertText: 'Hello World'
         });
     });
+
 </script>
 
 @endpush
