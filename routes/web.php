@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\GaleryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RegulationController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\User\GalleryController;
 use App\Http\Controllers\User\NewsController as UserNewsController;
 use App\Http\Controllers\User\RegulationController as UserRegulationController;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,6 @@ Route::get('/regulasi', [UserRegulationController::class, 'index'])->name('regul
 // ROUTE DOWNLOAD PDF 
 Route::get('/download/{regulation:id}', [UserRegulationController::class, 'download']);
 
-Route::view('/galeri', 'layouts.user.gallery')->name('galeri');
+Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri');
 
 Route::view('/pengaduan', 'layouts.user.complaint')->name('pengaduan');
