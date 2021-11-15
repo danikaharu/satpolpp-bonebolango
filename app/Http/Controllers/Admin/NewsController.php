@@ -7,6 +7,7 @@ use App\Models\Admin\News;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -83,6 +84,7 @@ class NewsController extends Controller
         $image->store('news', 'public');
 
         $news = News::create([
+            'slug' =>  Str::slug($request->title),
             'title' => $request->title,
             'body' => $dom->saveHTML(),
             'image' => $image->hashName(),
@@ -161,11 +163,10 @@ class NewsController extends Controller
         //get data news by ID
         $news = News::findOrFail($news->id);
 
-
-
         if ($request->file('image') == "") {
 
             $news->update([
+                'slug' =>  Str::slug($request->title),
                 'title'  => $request->title,
                 'body' => $dom->saveHTML(),
             ]);
@@ -184,6 +185,7 @@ class NewsController extends Controller
             $image->store('news', 'public');
 
             $news->update([
+                'slug' =>  Str::slug($request->title),
                 'title'  => $request->title,
                 'body'   => $dom->saveHTML(),
                 'image'  => $image->hashName(),
@@ -205,9 +207,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $delete = News::findOrFail($id);
+        $delete = News::findOrFail($slug);
         $file = public_path('storage/news/') . $delete->image;
         if (file_exists($file)) {
             @unlink($file);

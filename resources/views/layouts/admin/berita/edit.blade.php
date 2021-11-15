@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="card border-0 shadow rounded">
                 <div class="card-body">
-                    <form action="{{ route('news.update', $news->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('news.update', $news->slug)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="form-group">

@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin\Profile;
+// use App\Models\Admin\Profile
+
+use App\Models\Admin\Complaint;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ProfileSeeder::class);
+        $this->call([
+            ProfileSeeder::class,
+            ComplaintSeeder::class,
+        ]);
 
         User::create([
             'name' => 'Administrator',
