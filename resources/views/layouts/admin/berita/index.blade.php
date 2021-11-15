@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Berita')
+@section('title', 'Berita | Admin Satpol PP Bone Bolango')
 
 @section('content')
 <ol class="breadcrumb mb-4">
@@ -32,8 +32,7 @@
             <td>{!!Str::limit($item->body,20)!!}</td>
             <td>
 
-                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('news.destroy', $item->id) }}"
-                    method="POST">
+                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('news.destroy', $item->id) }}" method="POST">
                     <a href="{{ route('news.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')

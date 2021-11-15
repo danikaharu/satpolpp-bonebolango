@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Galeri Kegiatan')
+@section('title', 'Galeri Kegiatan | Admin Satpol PP Bone Bolango')
 
 @section('content')
 
@@ -33,8 +33,7 @@
             <td>{!! Str::limit($item->body,20) !!}</td>
             <td>
 
-                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                    action="{{ route('galery.destroy', $item->id) }}" method="POST">
+                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('galery.destroy', $item->id) }}" method="POST">
                     <a href="{{ route('galery.edit', $item->slug) }}" class="btn btn-sm btn-primary">EDIT</a>
                     @csrf
                     @method('DELETE')

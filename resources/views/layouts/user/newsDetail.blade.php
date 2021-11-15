@@ -1,6 +1,6 @@
 @extends('layouts.user.master')
 
-@section('title')Berita @endsection
+@section('title'){{ $news->title }} @endsection
 
 @section('content')
 <!-- ======= Breadcrumbs ======= -->
@@ -16,46 +16,41 @@
     </div>
 </section><!-- End Breadcrumbs -->
 
-<!-- ======= Blog Section ======= -->
+<!-- ======= Blog Single Section ======= -->
 <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
 
         <div class="row">
 
-            <div class="col-lg-7 entries">
-                @foreach ($news1 as $data)
-                <article class="entry">
+            <div class="col-lg-8 entries">
+
+                <article class="entry entry-single">
 
                     <div class="entry-img">
-                        <img src="{{ Storage::url('news/'.$data->image) }}" alt="{{ $data->title }}" class="img-fluid">
+                        <img src="{{ Storage::url('news/'.$news->image) }}" alt="{{ $news->title }}" class="img-fluid">
                     </div>
 
                     <h2 class="entry-title">
-                        <a href="{{ route('berita.detail', $data->slug) }}">{{ $data->title }}</a>
+                        <a href="#">{{ $news->title }}</a>
                     </h2>
 
                     <div class="entry-meta">
                         <ul>
                             <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">Admin</a></li>
-                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="{{ $data->created_at->format('d M Y H:i') }}">{{ $data->created_at->format('d M Y H:i') }}</time></a></li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="{{ $news->created_at->format('d M Y H:i') }}">{{ $news->created_at->format('d M Y H:i') }}</time></a></li>
                         </ul>
                     </div>
 
                     <div class="entry-content">
                         <p>
-                            {{ Illuminate\Support\Str::words(strip_tags($data->body) , 50) }}
+                            {!! $news->body !!}
                         </p>
-                        <div class="read-more">
-                            <a href="{{ route('berita.detail', $data->slug) }}">Selengkapnya</a>
-                        </div>
                     </div>
-
                 </article><!-- End blog entry -->
-                @endforeach
-                {{ $news1->links('vendor.pagination.custom') }}
+
             </div><!-- End blog entries list -->
 
-            <div class="col-lg-5">
+            <div class="col-lg-4">
 
                 <div class="sidebar">
 
@@ -67,16 +62,15 @@
                         </form>
                     </div><!-- End sidebar search formn-->
 
-                    <h3 class="sidebar-title">Berita Terkini</h3>
+                    <h3 class="sidebar-title">Recent Posts</h3>
                     <div class="sidebar-item recent-posts">
-                        @foreach ($news2 as $data)
+                        @foreach ($recentNews as $data)
                         <div class="post-item clearfix">
                             <img src="{{ Storage::url('news/'.$data->image) }}" alt="{{ $data->title }}">
-                            <h4><a href="#">{{ $data->title }}</a></h4>
+                            <h4><a href="{{ route('berita.detail', $data->slug) }}">{{ $data->title }}</a></h4>
                             <time datetime="{{ $data->created_at->format('d M Y H:i') }}">{{ $data->created_at->format('d M Y H:i') }}</time>
                         </div>
                         @endforeach
-
                     </div><!-- End sidebar recent posts-->
 
                 </div><!-- End sidebar -->
@@ -86,6 +80,5 @@
         </div>
 
     </div>
-</section><!-- End Blog Section -->
-
+</section><!-- End Blog Single Section -->
 @endsection

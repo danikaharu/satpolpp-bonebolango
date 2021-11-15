@@ -9,9 +9,9 @@
 
         <ol>
             <li><a href="index.html">Beranda</a></li>
-            <li>Profil</li>
+            <li>{{ $profile->title }}</li>
         </ol>
-        <h2>Profil</h2>
+        <h2>{{ $profile->title }}</h2>
 
     </div>
 </section><!-- End Breadcrumbs -->
@@ -20,7 +20,7 @@
 <section id="blog" class="blog">
     <div class="container" data-aos="fade-up">
 
-        <h1>Ini adalah profil</h1>
+        {!! $profile->content !!}
 
     </div>
 </section><!-- End Blog Section -->

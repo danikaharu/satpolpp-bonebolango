@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title', 'Regulasi')
+@section('title', 'Tambah Regulasi | Admin Satpol PP Bone Bolango')
 
 @section('content')
 <ol class="breadcrumb mb-4">
@@ -20,41 +20,41 @@
                         <div class="form-group">
                             <label class="font-weight-bold">Judul Regulasi</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Judul Regulasi">
-                        
+
                             <!-- error message untuk title -->
                             @error('title')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label class="font-weight-bold">Deskripsi</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5" placeholder="Masukan Deskripsinya">{{ old('description') }}</textarea>
-                        
+
                             <!-- error message untuk description(isi) -->
                             @error('description')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="font-weight-bold">Dokumen</label>
                             <input type="file" class="form-control @error('document') is-invalid @enderror" name="document">
-                        
+
                             <!-- error message untuk title -->
                             @error('document')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
 
                         <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                    </form> 
+                    </form>
                 </div>
             </div>
         </div>
