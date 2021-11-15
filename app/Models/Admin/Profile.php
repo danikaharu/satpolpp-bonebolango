@@ -15,4 +15,9 @@ class Profile extends Model
         'slug',
         'content',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
