@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Regulation extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'document',
     ];

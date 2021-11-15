@@ -4,6 +4,7 @@ namespace Database\Factories\Admin;
 
 use App\Models\Admin\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProfileFactory extends Factory
 {
@@ -17,6 +18,7 @@ class ProfileFactory extends Factory
     {
         return [
             'title' => $this->faker->jobTitle(),
+            'slug' => Str::slug($this->faker->jobTitle()),
             'content' => $this->faker->paragraph(),
         ];
     }
