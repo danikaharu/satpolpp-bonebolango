@@ -17,8 +17,8 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->jobTitle(),
-            'slug' => Str::slug($this->faker->jobTitle()),
+            'title' => 'Visi & Misi',
+            'slug' => 'visi-misi',
             'content' => $this->faker->paragraph(),
         ];
     }

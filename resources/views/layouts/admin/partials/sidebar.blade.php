@@ -35,21 +35,11 @@
                         <span>Profil</span>
                     </a>
                     <ul class="submenu ">
+                        @foreach ($data as $data)
                         <li class="submenu-item ">
-                            <a href="{{ route('profile.index') }}">Profil Instansi</a>
+                            <a href="{{ route('profile.show', $data->slug) }}">{{ $data->title }}</a>
                         </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('struktur.index') }}">Struktur Organisasi</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('tupoksi.index') }}">Tugas Pokok & Fungsi</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('unitjabatan.index') }}">Unit & Jabatan</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('visionmission.index') }}">Visi & Misi</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </li>
 

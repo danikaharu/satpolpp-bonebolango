@@ -20,5 +20,3 @@ class Profile extends Model
     {
         return 'slug';
     }
-
-}
