@@ -7,6 +7,7 @@ use App\Models\Admin\Galery;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GaleryController extends Controller
 {
@@ -82,6 +83,7 @@ class GaleryController extends Controller
             'title' => $request->title,
             'body' => $dom->saveHTML(),
             'image' => $image->hashName(),
+            'slug' => Str::slug($request->title),
         ]);
 
         if ($galery) {
@@ -112,7 +114,7 @@ class GaleryController extends Controller
      */
     public function edit(Galery $galery)
     {
-        return view('layouts.admin.galeri.edit',compact('galery'));
+        return view('layouts.admin.galeri.edit', compact('galery'));
     }
 
     /**
@@ -160,6 +162,7 @@ class GaleryController extends Controller
             $galery->update([
                 'title'  => $request->title,
                 'body'   => $dom->saveHTML(),
+                'slug' => Str::slug($request->title),
             ]);
         } else {
 
@@ -180,6 +183,7 @@ class GaleryController extends Controller
                 'title'     => $request->title,
                 'body'   => $dom->saveHTML(),
                 'image'     => $image->hashName(),
+                'slug' => Str::slug($request->title),
             ]);
         }
 
@@ -200,7 +204,8 @@ class GaleryController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Galery::findOrFail($id);
+        $delete = Galery::find($id);
+
         $file = public_path('storage/galery/') . $delete->image;
         if (file_exists($file)) {
             @unlink($file);

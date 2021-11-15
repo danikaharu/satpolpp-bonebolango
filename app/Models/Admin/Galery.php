@@ -15,4 +15,9 @@ class Galery extends Model
         'body',
         'image',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
