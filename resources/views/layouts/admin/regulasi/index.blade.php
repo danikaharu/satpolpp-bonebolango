@@ -40,7 +40,6 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger my-2">Hapus</button>
                                     </form>
-
                                 </td>
                             </tr>
                             @endforeach ($galeries as $galeri)
