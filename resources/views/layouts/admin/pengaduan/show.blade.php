@@ -47,11 +47,11 @@
                             <td>:</td>
                             <td>
                                 @if ($complaints->status =='0')
-                                <a href="#" class="badge badge-danger">Pending</a>
+                                <a href="#" class="badge bg-danger text-white">Menunggu Tanggapan</a>
                                 @elseif ($pengaduan->status == 'proses')
-                                <a href="#" class="badge badge-warning text-white">Proses</a>
+                                <a href="#" class="badge bg-warning text-white">Dalam Tindakan</a>
                                 @else
-                                <a href="#" class="badge badge-success">Selesai</a>
+                                <a href="#" class="badge bg-success text-white">Selesai</a>
                                 @endif
                             </td>
                         </tr>
@@ -77,16 +77,16 @@
                         <div class="input-group mb-3">
                             <select name="status" id="status" class="custom-select">
                                 @if ($complaints->status=='0')
-                                <option selected value="0">Pending</option>
-                                <option value="proses">Proses</option>
+                                <option selected value="0">Menunggu Tanggapan</option>
+                                <option value="proses">Dalam Tindakan</option>
                                 <option value="selesai">Selesai</option>
                                 @elseif ($complaints->status=='proses')
-                                <option value="0">Pending</option>
-                                <option selected value="proses">Proses</option>
+                                <option value="0">Menunggu Tanggapan</option>
+                                <option selected value="proses">Dalam Tindakan</option>
                                 <option value="selesai">Selesai</option>
                                 @else
-                                <option value="0">Pending</option>
-                                <option value="proses">Proses</option>
+                                <option value="0">Menunggu Tanggapan</option>
+                                <option value="proses">Dalam Tindakan</option>
                                 <option selected value="selesai">Selesai</option>
                                 @endif
                             </select>
