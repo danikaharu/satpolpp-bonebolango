@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Complaints;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Complaint;
+use App\Models\Admin\Response;
 use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
@@ -18,7 +20,11 @@ class ComplaintController extends Controller
 
     public function index()
     {
-        return view('layouts.admin.pengaduan.index');
+        $complaints = Complaint::get();
+        // dd($complaints);
+        return view('layouts.admin.pengaduan.index', [
+            'complaints' => $complaints,
+        ]);
     }
 
     /**
@@ -48,9 +54,13 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($complaints_id)
     {
-        //
+        // dd(Complaint::all());
+        $complaint = Complaint::where('complaint_id', $complaints_id)->first();
+
+        $response = Response::where('complaint_id', $complaints_id)->first();
+        return view('layouts.admin.pengaduan.show', ['complaints' => $complaint, 'responses' => $response]);
     }
 
     /**
