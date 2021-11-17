@@ -35,14 +35,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 
-    Route::prefix('pengaduan')->group(function () {
-        Route::get('/', [ComplaintController::class, 'index'])->name('admin.pengaduan');
-    });
+    // Pengaduan
+    Route::resource('complaint', ComplaintController::class);
 
     Route::get('/profile/{slug}', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    
+
+
     // fix crud regulasi
     Route::resource('regulation', RegulationController::class);
 

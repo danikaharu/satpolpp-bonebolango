@@ -37,7 +37,7 @@
                     <ul class="submenu ">
                         @foreach ($profile as $data)
                         <li class="submenu-item ">
-                            <a href="{{ route('admin.profile.show', $data->slug) }}">{{ $data->title }}</a>
+                            <a href="{{ route('profile.show', $data->slug) }}">{{ $data->title }}</a>
                         </li>
                         @endforeach
                     </ul>
@@ -65,7 +65,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="#" class='sidebar-link'>
+                    <a href="{{ route('complaint.index') }}" class='sidebar-link'>
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pengaduan</span>
                     </a>

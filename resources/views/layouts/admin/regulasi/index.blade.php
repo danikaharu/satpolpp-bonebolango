@@ -25,9 +25,9 @@
 
         <tr class="text-center">
             <td>{{$v += 1}}</td>
-            <td>
+            {{-- <td>
                 <iframe src="{{ Storage::url('regulation/'.$item->document) }}" frameborder="0" style="width:100%;min-height:250px;"></iframe>
-            </td>
+            </td> --}}
 
             <td>{{$item->title}}</td>
             <td>{!! Str::limit($item->description,50) !!}</td>
