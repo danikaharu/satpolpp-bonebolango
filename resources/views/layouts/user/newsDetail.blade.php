@@ -23,6 +23,7 @@
         <div class="row">
 
             <div class="col-lg-8 entries">
+                {!! $shareNews !!}
 
                 <article class="entry entry-single">
 

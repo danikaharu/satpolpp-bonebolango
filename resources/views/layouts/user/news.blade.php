@@ -23,6 +23,9 @@
         <div class="row">
 
             <div class="col-lg-8 entries">
+                @if($news1->isEmpty())
+                <h2>Maaf, data belum ada</h2>
+                @else
                 @foreach ($news1 as $data)
                 <article class="entry">
 
@@ -52,6 +55,8 @@
 
                 </article><!-- End blog entry -->
                 @endforeach
+                @endif
+
                 {{ $news1->links('vendor.pagination.custom') }}
             </div><!-- End blog entries list -->
 
@@ -67,6 +72,9 @@
                         </form>
                     </div><!-- End sidebar search formn-->
 
+                    @if($news2->isEmpty())
+                    <p>Maaf, data belum ada</p>
+                    @else
                     <h3 class="sidebar-title">Berita Terkini</h3>
                     <div class="sidebar-item recent-posts">
                         @foreach ($news2 as $data)
@@ -78,6 +86,8 @@
                         @endforeach
 
                     </div><!-- End sidebar recent posts-->
+                    @endif
+
 
                 </div><!-- End sidebar -->
 
