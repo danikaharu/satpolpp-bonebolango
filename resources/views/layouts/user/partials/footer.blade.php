@@ -19,8 +19,8 @@
                 <div class="col-lg-3 col-6 footer-links">
                     <h4>Link Terkait</h4>
                     <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="gorontaloprov.go.id" target="_blank">Pemerintah Provinsi Gorontalo</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="bonebolangokab.go.id" target="_blank">Pemerintah Kab. Bone Bolango</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('gorontalo') }}" target="_blank">Pemerintah Provinsi Gorontalo</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="{{ route('bonebol') }}" target="_blank">Pemerintah Kab. Bone Bolango</a></li>
                     </ul>
                 </div>
 
