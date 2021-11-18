@@ -22,7 +22,7 @@
 
         <div class="row">
 
-            <div class="col-lg-7 entries">
+            <div class="col-lg-8 entries">
                 @foreach ($news1 as $data)
                 <article class="entry">
 
@@ -55,14 +55,14 @@
                 {{ $news1->links('vendor.pagination.custom') }}
             </div><!-- End blog entries list -->
 
-            <div class="col-lg-5">
+            <div class="col-lg-4">
 
                 <div class="sidebar">
 
                     <h3 class="sidebar-title">Search</h3>
                     <div class="sidebar-item search-form">
-                        <form action="">
-                            <input type="text">
+                        <form action="{{ route('berita.cari') }}" method="GET">
+                            <input type="text" name="q">
                             <button type="submit"><i class="bi bi-search"></i></button>
                         </form>
                     </div><!-- End sidebar search formn-->
