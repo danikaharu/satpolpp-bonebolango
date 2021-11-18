@@ -16,13 +16,13 @@ class ComplaintFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->name();
+        $title = $this->faker->text();
         return [
-            'name' => $name,
-            'slug' =>  Str::slug($name),
-            'email' => $this->faker->userName().'@gmail.com',
+            'name' => $this->faker->name(),
+            'slug' =>  Str::slug($title),
+            'email' => $this->faker->userName() . '@gmail.com',
             'status' => '0',
-            'title' => $this->faker->jobTitle(),
+            'title' => $title,
             'description' => $this->faker->sentence(),
         ];
     }
