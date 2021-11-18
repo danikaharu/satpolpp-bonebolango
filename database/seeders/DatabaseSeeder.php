@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ProfileSeeder::class,
-            ComplaintSeeder::class,
         ]);
 
         User::create([
@@ -29,6 +28,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
         ]);
-        
     }
 }
