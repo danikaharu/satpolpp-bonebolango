@@ -2,6 +2,26 @@
 
 @section('title'){{ $news->title }} @endsection
 
+@push('style')
+    <style>
+             div#social-links {
+                margin: 0 auto;
+                max-width: 500px;
+            }
+            div#social-links ul li {
+                display: inline-block;
+            }          
+            div#social-links ul li a {
+                padding: 20px;
+                border: 1px solid #ccc;
+                margin: 1px;
+                font-size: 30px;
+                color: #222;
+                background-color: #ccc;
+            }
+        </style>
+@endpush
+
 @section('content')
 <!-- ======= Breadcrumbs ======= -->
 <section class="breadcrumbs">
@@ -23,8 +43,11 @@
         <div class="row">
 
             <div class="col-lg-8 entries">
-                {!! $shareNews !!}
 
+                    <div class="container">
+                        {!! $shareNews !!}
+                    </div>
+                    
                 <article class="entry entry-single">
 
                     <div class="entry-img">

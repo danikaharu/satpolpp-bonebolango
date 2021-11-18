@@ -17,15 +17,17 @@ class NewsController extends Controller
 
     public function show($slug)
     {
+        $news = News::where('slug', $slug)->first();
+        $recentNews = News::latest()->limit(4)->get();
+
         $shareNews = \Share::page(
-            'https://www.positronx.io/create-autocomplete-search-in-laravel-with-typeahead-js/',
-            'Your share text comes here'
+            'https://google.com',
+            $news->title,
         )
             ->facebook()
             ->whatsapp();
 
-        $news = News::where('slug', $slug)->first();
-        $recentNews = News::latest()->limit(4)->get();
+        
         return view('layouts.user.newsDetail', compact('news', 'recentNews', 'shareNews'));
     }
 }

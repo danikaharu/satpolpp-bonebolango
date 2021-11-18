@@ -9,6 +9,7 @@
     <title> @yield('title') - Satpol PP Bonebol</title>
 
     @include('layouts.user.partials.styles')
+    @stack('style')
 </head>
 
 <body>

@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-        // Jorenvh\Share\Providers\ShareServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,7 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        // 'Share' => Jorenvh\Share\ShareFacade::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
 
     ],
 
