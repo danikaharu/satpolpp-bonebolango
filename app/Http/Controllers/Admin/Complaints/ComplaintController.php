@@ -56,7 +56,7 @@ class ComplaintController extends Controller
 
         $complaint = Complaint::create([
             'name' => $request->name,
-            'slug' =>  Str::slug($request->name),
+            'slug' =>  Str::slug($request->title),
             'email' => $request->email,
             'title' => $request->title,
             'description' => $request->description,
