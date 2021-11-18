@@ -15,13 +15,15 @@ class CreateResponsesTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::create('responses', function (Blueprint $table) {
-            $table->id('response_id');
-            $table->integer('complaint_id')->nullable();
-            $table->text('response');
+            $table->id();
+            $table->unsignedBigInteger('complaint_id')->nullable();
+            $table->text('response')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('complaint_id')->references('id')->on('complaints');
+            $table->foreign('complaint_id')->references('id')->on('complaints')->onDelete('cascade');
         });
     }
 

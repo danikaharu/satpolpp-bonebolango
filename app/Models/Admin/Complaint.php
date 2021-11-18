@@ -11,6 +11,7 @@ class Complaint extends Model
     
     protected $fillable = [
         'name',
+        'slug',
         'email',
         'title',
         'description',
@@ -18,6 +19,11 @@ class Complaint extends Model
     ];
 
     public function response() {
-        return $this->hasOne(Response::class, 'complaint_id', 'complaint_id');
+        return $this->hasOne(Response::class, 'complaint_id', 'id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

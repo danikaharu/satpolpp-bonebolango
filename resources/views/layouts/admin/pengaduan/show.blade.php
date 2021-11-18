@@ -25,33 +25,33 @@
                         <tr>
                             <th>Nama Pengadu</th>
                             <td>:</td>
-                            <td>{{ $complaints->name }}</td>
+                            <td>{{ $complaint->name }}</td>
                         </tr>
                         <tr>
                             <th>Email</th>
                             <td>:</td>
-                            <td>{{ $complaints->email  }}</td>
+                            <td>{{ $complaint->email }}</td>
                         </tr>
                         <tr>
                             <th>Judul Pengaduan</th>
                             <td>:</td>
-                            <td>{{ $complaints->title }}</td>
+                            <td>{{ $complaint->title }}</td>
                         </tr>
                         <tr>
                             <th>Isi Pengaduan</th>
                             <td>:</td>
-                            <td>{{ $complaints->description }}</td>
+                            <td>{{ $complaint->description }}</td>
                         </tr>
                         <tr>
                             <th>Status</th>
                             <td>:</td>
                             <td>
-                                @if ($complaints->status =='0')
-                                <a href="#" class="badge badge-danger">Pending</a>
-                                @elseif ($pengaduan->status == 'proses')
-                                <a href="#" class="badge badge-warning text-white">Proses</a>
+                                @if ($complaint->status =='0')
+                                <a href="#" class="btn btn-danger">Menunggu Tanggapan</a>
+                                @elseif ($complaint->status == '1')
+                                <a href="#" class="btn btn-warning">Dalam Tindakan</a>
                                 @else
-                                <a href="#" class="badge badge-success">Selesai</a>
+                                <a href="#" class="btn btn-success">Selesai</a>
                                 @endif
                             </td>
                         </tr>
@@ -69,35 +69,42 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('response.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="pengaduan_id" value="">
+                    <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
                     <div class="form-group">
                         <label for="status">Status</label>
                         <div class="input-group mb-3">
                             <select name="status" id="status" class="custom-select">
-                                @if ($complaints->status=='0')
-                                <option selected value="0">Pending</option>
-                                <option value="proses">Proses</option>
-                                <option value="selesai">Selesai</option>
-                                @elseif ($complaints->status=='proses')
-                                <option value="0">Pending</option>
-                                <option selected value="proses">Proses</option>
-                                <option value="selesai">Selesai</option>
+                                @if ($complaint->status=='0')
+                                <option selected value="0">Menunggu Tanggapan</option>
+                                <option value="1">Dalam Tindakan</option>
+                                <option value="2">Selesai</option>
+                                @elseif ($complaint->status=='1')
+                                <option value="0">Menunggu Tanggapan</option>
+                                <option selected value="1">Dalam Tindakan</option>
+                                <option value="2">Selesai</option>
                                 @else
-                                <option value="0">Pending</option>
-                                <option value="proses">Proses</option>
-                                <option selected value="selesai">Selesai</option>
+                                <option value="0">Menunggu Tanggapan</option>
+                                <option value="1">Dalam Tindakan</option>
+                                <option selected value="2">Selesai</option>
                                 @endif
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="tanggapan">Tanggapan</label>
-                        <textarea name="tanggapan" id="tanggapan" rows="4" class="form-control"
-                            placeholder="Belum ada Tanggapan"></textarea>
+                        <label for="response">Tanggapan</label>
+                        <textarea name="response" id="response" rows="4"
+                            class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}"
+                            placeholder="Belum ada Tanggapan">{{ $complaint->response->response ?? '' }}</textarea>
+                        @error('response')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-purple">KIRIM</button>
+                    <button type="submit" class="btn btn-primary">KIRIM</button>
                 </form>
                 @if (Session::has('status'))
                 <div class="alert alert-success mt-2">

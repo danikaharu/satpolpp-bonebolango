@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Admin;
 
+use Illuminate\Support\Str;
 use App\Models\Admin\Complaint;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,8 +16,10 @@ class ComplaintFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->name();
         return [
-            'name' => $this->faker->name(),
+            'name' => $name,
+            'slug' =>  Str::slug($name),
             'email' => $this->faker->userName().'@gmail.com',
             'status' => '0',
             'title' => $this->faker->jobTitle(),

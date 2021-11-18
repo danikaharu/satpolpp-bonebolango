@@ -14,12 +14,13 @@ class CreateComplaintsTable extends Migration
     public function up()
     {
         Schema::create('complaints', function (Blueprint $table) {
-            $table->id('complaint_id');
+            $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->string('email');
             $table->string('title');
             $table->text('description');
-            $table->enum('status', ['0','proses', 'selesai']);
+            $table->enum('status', ['0','1', '2']);
             $table->timestamps();
         });
     }
