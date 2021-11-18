@@ -20,8 +20,8 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item {{ request()->is('admin') ? 'active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -29,42 +29,42 @@
 
                 <li class="sidebar-title">Konten Website</li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item {{ request()->is('admin/profile*') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-badge-fill"></i>
                         <span>Profil</span>
                     </a>
-                    <ul class="submenu ">
+                    <ul class="submenu {{ request()->is('admin/profile*') ? 'active' : '' }}  ">
                         @foreach ($profile as $data)
-                        <li class="submenu-item ">
+                        <li class="submenu-item">
                             <a href="{{ route('profile.show', $data->slug) }}">{{ $data->title }}</a>
                         </li>
                         @endforeach
                     </ul>
                 </li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ request()->is('admin/regulation*') ? 'active' : '' }} ">
                     <a href="{{ route('regulation.index') }}" class='sidebar-link'>
                         <i class="bi bi-file-ruled-fill"></i>
                         <span>Regulasi</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ request()->is('admin/galery*') ? 'active' : '' }} ">
                     <a href="{{ route('galery.index') }}" class='sidebar-link'>
                         <i class="bi bi-image-fill"></i>
                         <span>Galeri Kegiatan</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ request()->is('admin/news*') ? 'active' : '' }}  ">
                     <a href="{{ route('news.index') }}" class='sidebar-link'>
                         <i class="bi bi-newspaper"></i>
                         <span>Berita</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item {{ request()->is('admin/complaint*') ? 'active' : '' }}   ">
                     <a href="{{ route('complaint.index') }}" class='sidebar-link'>
                         <i class="bi bi-chat-dots-fill"></i>
                         <span>Pengaduan</span>

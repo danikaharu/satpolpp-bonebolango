@@ -20,13 +20,13 @@
                     </ul>
                 </li>
                 <li><a href="{{ route('regulasi') }}" class="nav-link {{ request()->is('regulasi') ? ' active' : '' }}">Regulasi</a></li>
-                <li class="dropdown"><a href="#" class="nav-link {{ request()->is('berita' || 'galeri') ? ' active' : '' }}"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#" class="nav-link {{ (Request::is('berita') || Request::is('galeri') ? 'active' : '') }}"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="{{ route('berita') }}">Berita</a></li>
                         <li><a href="{{ route('galeri') }}">Galeri Kegiatan</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ route('pengaduan') }}">Pengaduan</a></li>
+                <li><a href="{{ route('pengaduan') }}" class="nav-link {{ request()->is('pengaduan') ? ' active' : '' }}">Pengaduan</a></li>
                 <li><a class="getstarted" href="{{ route('login') }}">Login</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
