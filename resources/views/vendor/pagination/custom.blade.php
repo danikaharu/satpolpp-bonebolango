@@ -41,4 +41,5 @@
         </li>
         @endif
     </ul>
-    @endif
+</div>
+@endif
