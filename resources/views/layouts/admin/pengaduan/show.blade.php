@@ -95,16 +95,14 @@
 
                     <div class="form-group">
                         <label for="response">Tanggapan</label>
-                        <textarea name="response" id="response" rows="4"
-                            class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}"
-                            placeholder="Belum ada Tanggapan">{{ $complaint->response->response ?? '' }}</textarea>
+                        <textarea name="response" id="response" rows="4" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Belum ada Tanggapan">{{ $complaint->response->response ?? '' }}</textarea>
                         @error('response')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">KIRIM</button>
+                    <button type="submit" class="btn btn-primary">Kirim</button>
                 </form>
                 @if (Session::has('status'))
                 <div class="alert alert-success mt-2">

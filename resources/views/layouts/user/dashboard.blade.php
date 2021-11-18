@@ -12,8 +12,7 @@
                 <h2 data-aos="fade-up">Kami adalah garda terdepan penegakan peraturan daerah Bone Bolango</h2>
                 <div data-aos="fade-up" data-aos-delay="600">
                     <div class="text-center text-lg-start">
-                        <a href="#about"
-                            class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                        <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                             <span>Selengkapnya</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -45,8 +44,7 @@
                         melaksanakan pelayanan informasi.
                     </p>
                     <div class="text-center text-lg-start">
-                        <a href="#"
-                            class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                        <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                             <span>Selengkapnya</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -127,9 +125,7 @@
                     </div>
                     <span class="post-date">{{ $data->created_at->format('d M Y H:i') }}</span>
                     <h3 class="post-title">{{ $data->title }}</h3>
-                    <a href="{{ route('berita.detail', $data->slug) }}"
-                        class="readmore stretched-link mt-auto"><span>Selengkapnya</span><i
-                            class="bi bi-arrow-right"></i></a>
+                    <a href="{{ route('berita.detail', $data->slug) }}" class="readmore stretched-link mt-auto"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
             @endforeach
@@ -146,12 +142,12 @@
 
         <header class="section-header">
             <h2>Satpol PP Bone Bolango</h2>
-            <p>Layanan Pengaduan</p>
+            <p>Kontak Kami</p>
         </header>
 
         <div class="row gy-4">
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="row gy-4">
                     <div class="col-md-6">
@@ -185,73 +181,6 @@
                 </div>
 
             </div>
-
-            <div class="col-lg-6">
-                {{-- <form action="{{ route('complaint.store') }}" method="post" class="php-email-form"> --}}
-                    <form action="{{ route('complaint.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row gy-4">
-
-                            <div class="col-md-12">
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                    value="{{ old('name') }}" placeholder="Nama">
-                                @error('name')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
-                            {{-- <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="No. Telpon/WA">
-                            </div> --}}
-
-                            <div class="col-md-6 ">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    value="{{ old('email') }}" name="email" placeholder="Email">
-                                @error('email')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
-                            {{-- <div class="col-md-12">
-                                <input type="text" name="name" class="form-control" placeholder="Lokasi Kejadian">
-                            </div> --}}
-
-                            <div class="col-md-12">
-                                <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                    value="{{ old('title') }}" name="title" placeholder="Judul Aduan">
-                                @error('title')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12">
-                                <textarea class="form-control @error('description') is-invalid @enderror"
-                                    value="{{ old('description') }}" name="description" rows="6"
-                                    placeholder="Tuliskan Aduan Anda"></textarea>
-                                @error('description')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
-                            {{-- <div class="col-md-12">
-                                <input type="file" class="form-control" name="subject">
-                            </div> --}}
-
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                            </div>
-                        </div>
-                    </form>
-            </div>
-
         </div>
 
     </div>
