@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GaleryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RegulationController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\User\ComplaintController as UserComplaintController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\GalleryController;
 use App\Http\Controllers\User\NewsController as UserNewsController;
@@ -37,11 +38,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [LoginController::class, 'store']);
 
     // Pengaduan
-    
+
     Route::get('/profile/{slug}', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    
+
     Route::resource('complaint', ComplaintController::class);
     Route::post('response', [ResponseController::class, 'store'])->name('response.store');
 
@@ -75,7 +76,9 @@ Route::get('/download/{slug}', [UserRegulationController::class, 'download']);
 
 Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri');
 
-Route::view('/pengaduan', 'layouts.user.complaint')->name('pengaduan');
+Route::get('/pengaduan', [UserComplaintController::class, 'index'])->name('pengaduan');
+
+Route::get('/pengaduan/{slug}', [UserComplaintController::class, 'show'])->name('pengaduan.detail');
 
 // ROUTE PEMPROV Gorontalo
 Route::get('/gorontalo', function () {
