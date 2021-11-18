@@ -15,7 +15,8 @@ class ComplaintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(['auth']);
     }
 
@@ -77,12 +78,12 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($complaint_id)
     {
-        // dd(Complaint::all());
-        $complaint = Complaint::where('slug', $slug)->first();
+        // dd($complaint_id);
+        $complaint = Complaint::where('slug', $complaint_id)->first();
 
-        $response = Response::where('complaint_id', $slug)->first();
+        $response = Response::where('complaint_id', $complaint_id)->first();
         return view('layouts.admin.pengaduan.show', ['complaint' => $complaint, 'response' => $response]);
     }
 
@@ -117,6 +118,22 @@ class ComplaintController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $complaint = Complaint::findOrFail($slug);
+
+        // $complaint->delete();
+
+        // if($complaint) {
+        //     return redirect()->route('complaint.index')->with(['success' => 'Berhasil']);
+        // }else {
+        //     return redirect()->route('complaint.index')->with(['error' => 'Gagal']);
+        // }
+        $delete = Complaint::find($id);
+        $delete->delete();
+        // return redirect()->route('complaint.index')->with(['success', 'Data Berhasil Dihapus']);
+        if ($delete) {
+            return redirect()->route('complaint.index')->with(['success' => 'Berhasil']);
+        } else {
+            return redirect()->route('complaint.index')->with(['error' => 'Gagal']);
+        }
     }
 }

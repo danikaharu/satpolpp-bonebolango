@@ -23,6 +23,7 @@ class CreateResponsesTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             // $table->foreign('complaint_id')->references('id')->on('complaints');
+            $table->foreign('complaint_id')->references('id')->on('complaints')->onDelete('cascade');
         });
     }
 

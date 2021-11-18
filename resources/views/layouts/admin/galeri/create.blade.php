@@ -52,7 +52,6 @@
                             </div>
                             @enderror
                         </div>
-
                         <button type="submit" class="btn btn-md btn-primary">Simpan</button>
                     </form>
                 </div>

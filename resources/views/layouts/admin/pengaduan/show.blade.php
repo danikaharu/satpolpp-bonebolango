@@ -30,7 +30,7 @@
                         <tr>
                             <th>Email</th>
                             <td>:</td>
-                            <td>{{ $complaint->email  }}</td>
+                            <td>{{ $complaint->email }}</td>
                         </tr>
                         <tr>
                             <th>Judul Pengaduan</th>
@@ -72,7 +72,6 @@
                 <form action="{{ route('response.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="complaint_id" value="{{ $complaint->id }}">
-                    {{-- <input type="hidden" name="complaint_id" value="{{ $response->complaint_id}}"> --}}
                     <div class="form-group">
                         <label for="status">Status</label>
                         <div class="input-group mb-3">
@@ -93,11 +92,17 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="response">Tanggapan</label>
-                        <textarea name="response" id="response" rows="4" class="form-control"
-                            placeholder="Belum ada Tanggapan">{{ $responses->response ?? '' }}</textarea>
-                        {{-- {{ $complaint->response ? $complaint->response->response : ''}} --}}
+                        <textarea name="response" id="response" rows="4"
+                            class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}"
+                            placeholder="Belum ada Tanggapan">{{ $complaint->response->response ?? '' }}</textarea>
+                        @error('response')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">KIRIM</button>
                 </form>

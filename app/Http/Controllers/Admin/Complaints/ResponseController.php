@@ -42,9 +42,9 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        // $complaint = Complaint::all('id');
-        // $complaint = Complaint::where('id', $request->id)->first();
-        // $response = Response::where('complaint_id', $request->complaint_id)->first();
+        $this->validate($request, [
+            'response' => 'required|min:5',
+        ]);
         $complaint = Complaint::where('id', $request->complaint_id)->first();
         $response = Response::where('complaint_id', $request->complaint_id)->first();
       
@@ -57,7 +57,6 @@ class ResponseController extends Controller
                 'user_id' => Auth::user()->id,
             ]);
             return redirect()->route('complaint.show', ['complaint' => $complaint, 'response' => $response])->with(['status' => 'Berhasil Dikirim!']);
-            // return redirect()->route('complaint.show')->with(['status' => 'Berhasil Kirim']);
         }  else {
             $complaint->update(['status' => $request->status]);
 
@@ -66,9 +65,7 @@ class ResponseController extends Controller
                 'response' => $request->response,
                 'user_id' => Auth::user()->id,
             ]);
-            // Mail::to($pengaduan->user->email)->send(new MailNotif($pengaduan->user->username));
             return redirect()->route('complaint.show', ['complaint' => $complaint, 'response' => $response])->with(['status' => 'Berhasil Dikirim!']);
-            // return redirect()->route('complaint.show')->with(['status' => 'Berhasil Kirim']);
         }
     }
 
