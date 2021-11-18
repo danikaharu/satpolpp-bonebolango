@@ -38,15 +38,13 @@ class ProfileController extends Controller
         $profile->update([
             'title'  => $request->title,
             'content' => $request->content,
-            'slug' => Str::slug($request->title),
         ]);
 
         if ($profile) {
-            //redirect dengan pesan sukses
+            $profile->update([
+                'slug' => Str::slug($request->title),
+            ]);
             return redirect()->back();
-        } else {
-            //redirect dengan pesan error
-            return redirect()->back()->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 }
