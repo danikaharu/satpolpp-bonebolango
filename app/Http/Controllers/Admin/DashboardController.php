@@ -26,8 +26,8 @@ class DashboardController extends Controller
         $totalRegulation = Regulation::count();
         $totalGallery = Galery::count();
         $totalNews = News::count();
-        $totalComplaintInProcess = Complaint::where('status', '2')->count();
-        $totalComplaintCompleted = Complaint::where('status', '3')->count();
+        $totalComplaintInProcess = Complaint::where('status', '1')->count();
+        $totalComplaintCompleted = Complaint::where('status', '2')->count();
         return view('layouts.admin.dashboard', compact('totalComplaint', 'totalRegulation', 'totalGallery', 'totalNews',  'totalComplaintInProcess', 'totalComplaintCompleted'));
     }
 }
