@@ -62,6 +62,8 @@ Route::get('/berita', [UserNewsController::class, 'index'])->name('berita');
 
 Route::get('/berita/{slug}', [UserNewsController::class, 'show'])->name('berita.detail');
 
+Route::get('/berita/q', [UserNewsController::class, 'search'])->name('berita.cari');
+
 Route::get('/profil/{profile}', [UserProfileController::class, 'index'])->name('profil');
 
 Route::get('/regulasi', [UserRegulationController::class, 'index'])->name('regulasi');
@@ -72,3 +74,13 @@ Route::get('/download/{slug}', [UserRegulationController::class, 'download']);
 Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri');
 
 Route::view('/pengaduan', 'layouts.user.complaint')->name('pengaduan');
+
+// ROUTE PEMPROV Gorontalo
+Route::get('/gorontalo', function () {
+    return redirect()->away('https://gorontaloprov.go.id');
+})->name('gorontalo');
+
+// ROUTE PEMKAB Bonebol
+Route::get('/bonebol', function () {
+    return redirect()->away('https://bonebolangokab.go.id/web');
+})->name('bonebol');
