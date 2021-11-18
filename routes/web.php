@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\Complaints\ComplaintController;
+use App\Http\Controllers\Admin\Complaints\ResponseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GaleryController;
 use App\Http\Controllers\Admin\NewsController;
@@ -36,12 +37,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [LoginController::class, 'store']);
 
     // Pengaduan
-    Route::resource('complaint', ComplaintController::class);
-
+    
     Route::get('/profile/{slug}', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-
+    
+    Route::resource('complaint', ComplaintController::class);
+    Route::post('response', [ResponseController::class, 'store'])->name('response.store');
 
     // fix crud regulasi
     Route::resource('regulation', RegulationController::class);

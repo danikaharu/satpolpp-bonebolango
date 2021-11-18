@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Complaint;
 use App\Models\Admin\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ComplaintController extends Controller
 {
@@ -34,7 +35,7 @@ class ComplaintController extends Controller
      */
     public function create()
     {
-        //
+        // return view()
     }
 
     /**
@@ -45,7 +46,29 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'title' => 'required|min:5',
+            'description' => 'required',
+        ]);
+
+        $complaint = Complaint::create([
+            'name' => $request->name,
+            'slug' =>  Str::slug($request->name),
+            'email' => $request->email,
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => '0',
+        ]);
+
+        if ($complaint) {
+            // redirect kalau sukses
+            return redirect()->route('pengaduan')->with(['success' => 'Data Berhasil Disimpan']);
+        } else {
+            // redirect kalau tidak sukses
+            return redirect()->route('pengaduan')->with(['failed' => 'Data Gagal Disimpan']);
+        }
     }
 
     /**
@@ -54,13 +77,13 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($complaints_id)
+    public function show($slug)
     {
         // dd(Complaint::all());
-        $complaint = Complaint::where('complaint_id', $complaints_id)->first();
+        $complaint = Complaint::where('slug', $slug)->first();
 
-        $response = Response::where('complaint_id', $complaints_id)->first();
-        return view('layouts.admin.pengaduan.show', ['complaints' => $complaint, 'responses' => $response]);
+        $response = Response::where('complaint_id', $slug)->first();
+        return view('layouts.admin.pengaduan.show', ['complaint' => $complaint, 'response' => $response]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\User;
+use App\Models\Complaint;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,11 @@ class Response extends Model
         'user_id',
     ];
 
+    // public function complaints(){
+    //     return $this->belongsTo(Complaint::class);
+    // }
+
     public function user() {
-        return $this->hasOne(User::class, 'user_id', 'id');
+        return $this->hasOne(User::class);
     }
 }

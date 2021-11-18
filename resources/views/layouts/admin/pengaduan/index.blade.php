@@ -32,15 +32,15 @@
             {{-- <td>{{ Str::limit($item->description, 20) }}</td> --}}
             <td>
                 @if ($item->status =='0')
-                    <div class="badge rounded-pill bg-danger text-white">Pending</div>
-                @elseif ($v->status == 'proses')
-                    <div class="badge bg-warning text-white">Proses</div>
+                    <div class="btn btn-danger">Menunggu Tanggapan</div>
+                @elseif ($item->status == '1')
+                    <div class="btn btn-warning">Dalam Tindakan</div>
                 @else
-                    <div class="badge bg-success">Selesai</a>
+                    <div class="btn btn-success">Selesai</a>
                 @endif
             </td>
             {{-- <td><a href="{{ route('pengaduan.show', $item->pengaduan_id) }}" style="text-decoration: underline">Lihat</a></td> --}}
-            <td><a href="{{ route('complaint.show', $item->complaint_id) }}" class="btn btn-sm btn-primary">Lihat</a></td>
+            <td><a href="{{ route('complaint.show', $item->slug) }}" class="btn btn-sm btn-primary">Lihat</a></td>
         </tr>
 
         @endforeach

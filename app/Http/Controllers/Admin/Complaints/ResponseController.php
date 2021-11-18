@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin\Complaints;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Complaint;
+use App\Models\Admin\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResponseController extends Controller
 {
@@ -28,7 +31,7 @@ class ResponseController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -39,7 +42,34 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $complaint = Complaint::all('id');
+        // $complaint = Complaint::where('id', $request->id)->first();
+        // $response = Response::where('complaint_id', $request->complaint_id)->first();
+        $complaint = Complaint::where('id', $request->complaint_id)->first();
+        $response = Response::where('complaint_id', $request->complaint_id)->first();
+      
+        // Logika tanggapan pengaduan
+        if ($response) {
+            $complaint->update(['status' => $request->status]);
+
+            $response->update([
+                'response' => $request->response,
+                'user_id' => Auth::user()->id,
+            ]);
+            return redirect()->route('complaint.show', ['complaint' => $complaint, 'response' => $response])->with(['status' => 'Berhasil Dikirim!']);
+            // return redirect()->route('complaint.show')->with(['status' => 'Berhasil Kirim']);
+        }  else {
+            $complaint->update(['status' => $request->status]);
+
+            $response = Response::create([
+                'complaint_id' => $request->complaint_id,
+                'response' => $request->response,
+                'user_id' => Auth::user()->id,
+            ]);
+            // Mail::to($pengaduan->user->email)->send(new MailNotif($pengaduan->user->username));
+            return redirect()->route('complaint.show', ['complaint' => $complaint, 'response' => $response])->with(['status' => 'Berhasil Dikirim!']);
+            // return redirect()->route('complaint.show')->with(['status' => 'Berhasil Kirim']);
+        }
     }
 
     /**
