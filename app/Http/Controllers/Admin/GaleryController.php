@@ -23,7 +23,7 @@ class GaleryController extends Controller
 
     public function index()
     {
-        $galeries = Galery::get();
+        $galeries = Galery::latest()->get();
         return view('layouts.admin.galeri.index', [
             'galeries' => $galeries
         ]);

@@ -22,7 +22,7 @@ class RegulationController extends Controller
 
     public function index()
     {
-        $regulation = Regulation::get();
+        $regulation = Regulation::latest()->get();
         return view('layouts.admin.regulasi.index', [
             'regulation' => $regulation,
         ]);

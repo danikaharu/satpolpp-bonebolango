@@ -23,7 +23,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = News::get();
+        $news = News::latest()->get();
         return view('layouts.admin.berita.index', [
             'news' => $news,
         ]);
@@ -36,7 +36,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        
+
 
         return view('layouts.admin.berita.create');
     }
