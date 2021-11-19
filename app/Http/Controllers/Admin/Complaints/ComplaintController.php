@@ -40,39 +40,6 @@ class ComplaintController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email',
-            'title' => 'required|min:5',
-            'description' => 'required',
-        ]);
-
-        $complaint = Complaint::create([
-            'name' => $request->name,
-            'slug' =>  Str::slug($request->title),
-            'email' => $request->email,
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => '0',
-        ]);
-
-        if ($complaint) {
-            // redirect kalau sukses
-            return redirect()->route('pengaduan')->with(['success' => 'Data Berhasil Disimpan']);
-        } else {
-            // redirect kalau tidak sukses
-            return redirect()->route('pengaduan')->with(['failed' => 'Data Gagal Disimpan']);
-        }
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
