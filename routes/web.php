@@ -63,9 +63,9 @@ Route::get('/', [UserDashboardController::class, 'index'])->name('home');
 
 Route::get('/berita', [UserNewsController::class, 'index'])->name('berita');
 
-Route::get('/berita/{slug}', [UserNewsController::class, 'show'])->name('berita.detail');
+Route::get('/berita/{news:slug}', [UserNewsController::class, 'show'])->name('berita.detail');
 
-Route::get('/berita/q', [UserNewsController::class, 'search'])->name('berita.cari');
+Route::get('/berita/judul', [UserNewsController::class, 'search'])->name('berita.cari');
 
 Route::get('/profil/{profile}', [UserProfileController::class, 'index'])->name('profil');
 
@@ -78,7 +78,9 @@ Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri');
 
 Route::get('/pengaduan', [UserComplaintController::class, 'index'])->name('pengaduan');
 
-Route::get('/pengaduan/{slug}', [UserComplaintController::class, 'show'])->name('pengaduan.detail');
+Route::post('/pengaduan', [UserComplaintController::class, 'store'])->name('pengaduan.store');
+
+Route::get('/pengaduan/{complaint:slug}', [UserComplaintController::class, 'show'])->name('pengaduan.detail');
 
 // ROUTE PEMPROV Gorontalo
 Route::get('/gorontalo', function () {

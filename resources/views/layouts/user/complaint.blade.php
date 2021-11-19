@@ -28,7 +28,7 @@
 
         <section class="contact">
             <div class="col-lg-12">
-                <form action="{{ route('complaint.store') }}" method="POST" enctype="multipart/form-data" style="background: #fafbff;
+                <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data" style="background: #fafbff;
                                                                                                                  padding: 30px;
                                                                                                                  height: 100%;">
                     @csrf
