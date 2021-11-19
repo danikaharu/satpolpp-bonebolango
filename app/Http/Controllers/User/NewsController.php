@@ -4,30 +4,32 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\News;
-
+use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $news1 = News::latest()->paginate(4);
-        $news2 = News::latest()->limit(4)->get();
-        return view('layouts.user.news', compact('news1', 'news2'));
+        $news = News::latest()->paginate(4);
+        $recentNews = News::latest()->limit(4)->get();
+        return view('layouts.user.news', compact('news', 'recentNews'));
     }
 
-    public function show($slug)
+    public function show(News $news)
     {
-        $news = News::where('slug', $slug)->first();
         $recentNews = News::latest()->limit(4)->get();
 
-        $shareNews = \Share::page(
-            'https://google.com',
-            $news->title,
-        )
-            ->facebook()
-            ->whatsapp();
+        return view('layouts.user.newsDetail', compact('news', 'recentNews'));
+    }
 
-        
-        return view('layouts.user.newsDetail', compact('news', 'recentNews', 'shareNews'));
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        dd($search);
+
+        $news = News::where('title', 'like', '%' . $search . '%')->get();
+        $recentNews = News::latest()->limit(4)->get();
+        return view('layouts.user.newsSearch', compact('news', 'recentNews'));
     }
 }
