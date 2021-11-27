@@ -140,6 +140,30 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'title' => [
+            'required' => "Tambahkan Judul Karena Judul Harus Ada"
+        ],
+        'description' => [
+            'required' => "Tambahkan Deskripsi"
+        ],
+        'document' => [
+            'required' => "Mohon Lampirkan Dokumen"
+        ],
+        'body' => [
+            'required' => "Tambahkan Isi"
+        ],
+        'image' => [
+            'required' => "Mohon Lampirkan Gambar"
+        ],
+        'response' => [
+            'required' => "Tambahkan Tanggapan Petugas"
+        ],
+        'name' => [
+            'required' => "Masukan Nama Anda"
+        ],
+        'email' => [
+            'required' => "Harap Memasukan Email Anda"
+        ],
     ],
 
     /*
