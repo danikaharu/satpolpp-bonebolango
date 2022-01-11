@@ -64,13 +64,13 @@
 
                 <div class="sidebar">
 
-                    <h3 class="sidebar-title">Search</h3>
+                    {{-- <h3 class="sidebar-title">Search</h3>
                     <div class="sidebar-item search-form">
-                        <form action="{{ route('berita.cari') }}">
-                            <input type="text" name="search">
+                        <form action="/search" method="POST">
+                            <input type="text" name="q">
                             <button type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                    </div><!-- End sidebar search formn-->
+                    </div><!-- End sidebar search formn--> --}}
 
                     @if($recentNews->isEmpty())
                     <p>Maaf, data belum ada</p>

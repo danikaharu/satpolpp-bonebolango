@@ -21,15 +21,4 @@ class NewsController extends Controller
 
         return view('layouts.user.newsDetail', compact('news', 'recentNews'));
     }
-
-    public function search(Request $request)
-    {
-        $search = $request->search;
-
-        dd($search);
-
-        $news = News::where('title', 'like', '%' . $search . '%')->get();
-        $recentNews = News::latest()->limit(4)->get();
-        return view('layouts.user.newsSearch', compact('news', 'recentNews'));
-    }
 }

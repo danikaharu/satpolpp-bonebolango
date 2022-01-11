@@ -54,15 +54,15 @@
 
                 <div class="sidebar">
 
-                    <h3 class="sidebar-title">Search</h3>
+                    {{-- <h3 class="sidebar-title">Search</h3>
                     <div class="sidebar-item search-form">
-                        <form action="{{ route('berita.cari') }}">
+                        <form action="#">
                             <input type="text" name="search">
                             <button type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                    </div><!-- End sidebar search formn-->
+                    </div><!-- End sidebar search formn--> --}}
 
-                    <h3 class="sidebar-title">Recent Posts</h3>
+                    <h3 class="sidebar-title">Berita terkini</h3>
                     <div class="sidebar-item recent-posts">
                         @foreach ($recentNews as $data)
                         <div class="post-item clearfix">
