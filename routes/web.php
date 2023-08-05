@@ -71,6 +71,8 @@ Route::get('/profil/{profile}', [UserProfileController::class, 'index'])->name('
 
 Route::get('/regulasi', [UserRegulationController::class, 'index'])->name('regulasi');
 
+Route::get('/bidang/{news:sector}', [UserNewsController::class, 'detailSector'])->name('bidang.detail');
+
 // ROUTE DOWNLOAD PDF 
 Route::get('/download/{slug}', [UserRegulationController::class, 'download']);
 
