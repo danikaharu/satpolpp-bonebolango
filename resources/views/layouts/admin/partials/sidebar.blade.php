@@ -102,9 +102,16 @@
 
                  <hr>
 
-                 {{-- Selesai Fungsi Logout --}}
+                 <li class="sidebar-item {{ request()->is('admin/account*') ? 'active' : '' }}   ">
+                     <a href="{{ route('account.index') }}" class='sidebar-link'>
+                         <i class="bi bi-person"></i>
+                         <span>Akun</span>
+                     </a>
+                 </li>
+
+                 {{-- Fungsi Logout --}}
                  <li class="sidebar-item  ">
-                     <form action="{{ route('admin.logout') }}" method="post">
+                     <form action="{{ route('logout') }}" method="post">
                          @csrf
                          <button type="submit" class="sidebar-link btn btn-light">
                              <i class="bi bi-box-arrow-right text-danger"></i>

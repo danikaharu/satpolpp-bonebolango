@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\LogoutController;
 use App\Http\Controllers\Admin\Complaints\ComplaintController;
@@ -31,11 +31,8 @@ use Illuminate\Support\Facades\Route;
 
 // Route Admin
 
-Route::prefix('admin')->group(function () {
-    Route::post('/logout', [LogoutController::class, 'store'])->name('admin.logout');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
 
     // Pengaduan
 
@@ -46,14 +43,17 @@ Route::prefix('admin')->group(function () {
     Route::resource('complaint', ComplaintController::class);
     Route::post('response', [ResponseController::class, 'store'])->name('response.store');
 
-    // fix crud regulasi
+    // crud regulasi
     Route::resource('regulation', RegulationController::class);
 
-    // fix crud Berita
+    // crud Berita
     Route::resource('news', NewsController::class);
 
-    // fix crud Galeri Kegiatan
+    // crud Galeri Kegiatan
     Route::resource('galery', GaleryController::class);
+
+    // Akun
+    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
 });
 
 
