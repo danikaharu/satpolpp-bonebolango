@@ -28,22 +28,23 @@
                         <p>{!! $profile->content !!}</p>
                     </div>
 
-                    <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-sm btn-primary" data-toggle="modal"
-                        data-target=".bd-example-modal-lg">Edit</a>
-
+                    <!-- Button trigger modal -->
+                    <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Edit
+                    </a>
 
                     {{-- modal edit --}}
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Edit {{ $profile->title }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
-
                                 <form action="{{ route('profile.update', $profile->slug) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
@@ -94,6 +95,8 @@
 
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script>
         $(document).ready(function() {

@@ -14,10 +14,18 @@ class News extends Model
         'slug',
         'body',
         'image',
+        'sector'
     ];
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function sector()
+    {
+        if ($this->sector == 1) {
+            return 'Penegakan Peraturan Perundang Undangan Daerah';
+        }
     }
 }

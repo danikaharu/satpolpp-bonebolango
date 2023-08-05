@@ -53,6 +53,7 @@ class NewsController extends Controller
             'title' => 'required|unique:news|min:5',
             'body' => 'required|min:5',
             'image' => 'required|image|mimes:png,jpg,jpeg',
+            'sector' => 'required|in:1,2,3,4'
         ]);
 
         // summernote save image
@@ -88,6 +89,7 @@ class NewsController extends Controller
             'title' => $request->title,
             'body' => $dom->saveHTML(),
             'image' => $image->hashName(),
+            'sector' => $request->sector,
         ]);
 
         if ($news) {
@@ -133,6 +135,7 @@ class NewsController extends Controller
         $this->validate($request, [
             'title'  => 'required',
             'body'   => 'required',
+            'sector' => 'required',
         ]);
 
         // summernote save image
@@ -169,6 +172,7 @@ class NewsController extends Controller
                 'slug' =>  Str::slug($request->title),
                 'title'  => $request->title,
                 'body' => $dom->saveHTML(),
+                'sector' => $request->sector,
             ]);
         } else {
 
@@ -189,6 +193,7 @@ class NewsController extends Controller
                 'title'  => $request->title,
                 'body'   => $dom->saveHTML(),
                 'image'  => $image->hashName(),
+                'sector' => $request->sector,
             ]);
         }
 

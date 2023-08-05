@@ -21,4 +21,12 @@ class NewsController extends Controller
 
         return view('layouts.user.newsDetail', compact('news', 'recentNews'));
     }
+
+    public function detailSector($sector)
+    {
+        $news = News::where('sector', $sector)->latest()->paginate(4);
+        $recentNews = News::where('sector', $sector)->latest()->limit(4)->get();
+
+        return view('layouts.user.sector', compact('news', 'recentNews'));
+    }
 }
