@@ -59,6 +59,7 @@ class NewsController extends Controller
         // summernote save image
 
         $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
         $dom->loadHTML($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $images = $dom->getElementsByTagName('img');
 
@@ -68,10 +69,15 @@ class NewsController extends Controller
                 // preg_match('/data:image\/(?.*?)\;/',$src,$groups);
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimetype = $groups['mime'];
-                $filename = uniqid();
-                $filepath = ("storage/news/image/$filename.$mimetype");
+                $path = 'storage/news/image/';
+                $filename = uniqid() . '.' . $mimetype;
+                $filepath =  $path . $filename;
 
-                $image = Image::make($src)->encode($mimetype, 100)->save(public_path($filepath));
+                if (!file_exists($path)) {
+                    mkdir($path, 0777, true);
+                }
+
+                $image = Image::make($src)->encode($mimetype, 100)->save($filepath);
 
                 $new_src = asset($filepath);
                 $img->removeAttribute('src');
@@ -81,24 +87,34 @@ class NewsController extends Controller
 
         // batas
 
-        $image = $request->file('image');
-        $image->store('news', 'public');
+        if ($request->file('image') && $request->file('image')->isValid()) {
 
-        $news = News::create([
+            $path = storage_path('app/public/news/');
+            $filename = $request->file('image')->hashName();
+
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            Image::make($request->file('image')->getRealPath())->resize(500, 500, function ($constraint) {
+                $constraint->upsize();
+                $constraint->aspectRatio();
+            })->save($path . $filename);
+
+            $attr['image'] = $filename;
+        }
+
+        News::create([
             'slug' =>  Str::slug($request->title),
             'title' => $request->title,
             'body' => $dom->saveHTML(),
-            'image' => $image->hashName(),
+            'image' => $attr['image'],
             'sector' => $request->sector,
         ]);
 
-        if ($news) {
-            // redirect kalau sukses
-            return redirect()->route('news.index')->with(['success' => 'Data Berhasil Disimpan']);
-        } else {
-            // redirect kalau tidak sukses
-            return redirect()->route('news.index')->with(['failed' => 'Data Gagal Disimpan']);
-        }
+        return redirect()
+            ->route('news.index')
+            ->with('success', __('Data berhasil dibuat.'));
     }
 
     /**
@@ -132,7 +148,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        $this->validate($request, [
+        $attr = $this->validate($request, [
             'title'  => 'required',
             'body'   => 'required',
             'sector' => 'required',
@@ -141,6 +157,7 @@ class NewsController extends Controller
         // summernote save image
 
         $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
         $dom->loadHTML($request->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $images = $dom->getElementsByTagName('img');
 
@@ -150,17 +167,16 @@ class NewsController extends Controller
                 // preg_match('/data:image\/(?.*?)\;/',$src,$groups);
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimetype = $groups['mime'];
-                $filename = uniqid();
-                $filepath = ("storage/news/image/$filename.$mimetype");
+                $filename = uniqid() . '.' . $mimetype;
+                $filepath =  'storage/news/image/' . $filename;
 
-                $image = Image::make($src)->encode($mimetype, 100)->save(public_path($filepath));
+                $image = Image::make($src)->encode($mimetype, 100)->save($filepath);
 
                 $new_src = asset($filepath);
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
             }
         }
-
         // batas
 
         //get data news by ID
@@ -197,13 +213,9 @@ class NewsController extends Controller
             ]);
         }
 
-        if ($news) {
-            //redirect dengan pesan sukses
-            return redirect()->route('news.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        } else {
-            //redirect dengan pesan error
-            return redirect()->route('news.index')->with(['error' => 'Data Gagal Diupdate!']);
-        }
+        return redirect()
+            ->route('news.index')
+            ->with('success', __('Artikel berhasil dibuat.'));
     }
 
     /**
@@ -212,14 +224,42 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(News $news)
     {
-        $delete = News::findOrFail($slug);
-        $file = public_path('storage/news/') . $delete->image;
-        if (file_exists($file)) {
-            @unlink($file);
+        try {
+            // determine path image
+            $path = storage_path('app/public/news/');
+
+            // if image exist remove file from directory
+            if ($news->image != null && file_exists($path . $news->image)) {
+                unlink($path . $news->image);
+            }
+
+            // summernote 
+            $dom = new \DOMDocument();
+            libxml_use_internal_errors(true);
+            $dom->loadHTML($news->body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $images = $dom->getElementsByTagName('img');
+            foreach ($images as $img) {
+                $src = $img->getAttribute('src');
+
+                // if summernote image exist remove file from directory
+                if ($src) {
+                    $len = strlen("http://127.0.0.1:8000/storage/news/image/");
+                    $fileName = substr($src, $len, strlen($src) - $len);
+                    unlink(public_path('storage/news/image/' . $fileName));
+                }
+            }
+
+            $news->delete();
+
+            return redirect()
+                ->route('news.index')
+                ->with('success', __('Data berhasil dihapus.'));
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('news.index')
+                ->with('error', __('Data tidak bisa dihapus karena berelasi dengan data lain.' . $th->getMessage()));
         }
-        $delete->delete();
-        return redirect()->route('news.index')->with(['success', 'Data Berhasil Dihapus']);
     }
 }

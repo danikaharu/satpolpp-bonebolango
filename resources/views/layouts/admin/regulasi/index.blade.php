@@ -38,7 +38,7 @@
                                         <td>
 
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                action="{{ route('regulation.destroy', $item->id) }}" method="POST">
+                                                action="{{ route('regulation.destroy', $item->slug) }}" method="POST">
                                                 <a href="{{ Storage::url('regulation/' . $item->document) }}"
                                                     target="pdf-frame" class="btn btn-sm btn-success my-2">Dokumen</a>
                                                 <a href="{{ route('regulation.edit', $item->slug) }}"

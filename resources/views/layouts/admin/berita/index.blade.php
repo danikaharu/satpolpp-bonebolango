@@ -37,10 +37,10 @@
                                         <td>{{ Illuminate\Support\Str::words(strip_tags($item->body), 6) }}</td>
                                         <td>
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                action="{{ route('news.destroy', $item->id) }}" method="POST">
+                                                action="{{ route('news.destroy', $item->slug) }}" method="POST">
                                                 <a href="{{ route('berita.detail', $item->slug) }}" target="_blank"
                                                     class="btn btn-sm btn-info my-2"><i class="bi bi-eye-fill"></i></a>
-                                                <a href="{{ Storage::url('news/' . $item->image) }}" target="_blank"
+                                                <a href="{{ asset('storage/news/' . $item->image) }}" target="_blank"
                                                     class="btn btn-sm btn-success my-2"><i class="bi bi-image-fill"></i></a>
                                                 <a href="{{ route('news.edit', $item->slug) }}"
                                                     class="btn btn-sm btn-primary my-2"><i

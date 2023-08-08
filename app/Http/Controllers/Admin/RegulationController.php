@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Regulation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class RegulationController extends Controller
@@ -46,26 +45,25 @@ class RegulationController extends Controller
      */
     public function store(Request $request)
     {
-
-        // dd($request);
-
         $this->validate($request, [
             'title' => 'required|unique:regulations|min:5',
             'description' => 'required|min:5',
             'document' => 'required|mimes:pdf',
         ]);
 
-        $data = new Regulation();
+        if ($request->file('document') && $request->file('document')->isValid()) {
 
-        $document = $request->document;
-        $filename = time() . '.' . $document->getClientOriginalExtension();
-        $request->document->move(public_path('storage/regulation/'), $filename);
-        $data->document = $filename;
-        $data->slug =  Str::slug($request->title);
-        $data->title = $request->title;
-        $data->description = $request->description;
+            $filename = $request->file('document')->hashName();
+            $request->file('document')->storeAs('regulation/', $filename, 'public');
+        }
 
-        $data->save();
+        $regulation = new Regulation();
+        $regulation->document = $filename;
+        $regulation->slug =  Str::slug($request->title);
+        $regulation->title = $request->title;
+        $regulation->description = $request->description;
+
+        $regulation->save();
         return redirect()->route('regulation.index')->with(['success', 'Berhasil Upload Dokumen']);
     }
 
@@ -100,51 +98,31 @@ class RegulationController extends Controller
      */
     public function update(Request $request, Regulation $regulation)
     {
+        $attr = $this->validate($request, [
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+            'document' => 'required|mimes:pdf',
+        ]);
 
-        //get data news by ID
+        if ($request->file('document') && $request->file('document')->isValid()) {
 
+            $path = storage_path('app/public/regulation/');
+            $filename = $request->file('document')->hashName();
 
-        $regulation = Regulation::findOrFail($regulation->id);
-        if ($request->file('document') == "") {
-            $this->validate($request, [
-                'title' => 'required|min:5',
-                'description' => 'required|min:5',
-            ]);
-
-            $regulation->update([
-                'slug' =>  Str::slug($request->title),
-                'title'  => $request->title,
-                'description' => $request->description,
-            ]);
-        } else {
-
-            $this->validate($request, [
-                'title' => 'required|min:5',
-                'description' => 'required|min:5',
-                'document' => 'required|mimes:pdf',
-            ]);
-
-            // hapus document
-            $delete = Regulation::findOrFail($regulation->id);
-            $file = public_path('storage/regulation/') . $delete->document;
-            if (file_exists($file)) {
-                @unlink($file);
+            // delete old file from storage
+            if ($regulation->document != null && file_exists($path . $regulation->document)) {
+                unlink($path . $regulation->document);
             }
-            Storage::delete($file);
 
-            // new Data
-
-            $document = $request->document;
-            $filename = time() . '.' . $document->getClientOriginalExtension();
-            $request->document->move(public_path('storage/regulation/'), $filename);
-
-            $regulation->update([
-                'document' => $filename,
-                'slug' =>  Str::slug($request->title),
-                'title'  => $request->title,
-                'description' => $request->description,
-            ]);
+            $request->file('document')->storeAs('regulation/', $filename, 'public');
         }
+
+        $regulation->update([
+            'title' => $attr['title'],
+            'slug' => Str::slug($attr['title']),
+            'description' => $attr['description'],
+            'document' => $filename,
+        ]);
 
         return redirect()->route('regulation.index')->with(['success', 'Berhasil Upload Dokumen']);
     }
@@ -155,14 +133,23 @@ class RegulationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(Regulation $regulation)
     {
-        $delete = Regulation::findOrFail($slug);
-        $file = public_path('storage/regulation/') . $delete->document;
-        if (file_exists($file)) {
-            @unlink($file);
+        try {
+            // determine path file
+            $pathFile = storage_path('app/public/regulation/');
+
+            // if document file exist remove file from directory
+            if ($regulation->document != null && file_exists($pathFile . $regulation->document)) {
+                unlink($pathFile . $regulation->document);
+            }
+
+            $regulation->delete();
+            return redirect()->route('regulation.index')->with('success', 'Data Berhasil Dihapus');
+        } catch (\Throwable $th) {
+            return redirect()
+                ->route('regulation.index')
+                ->with('error', __($th->getMessage()));
         }
-        $delete->delete();
-        return redirect()->route('regulation.index')->with(['success', 'Data Berhasil Dihapus']);
     }
 }
