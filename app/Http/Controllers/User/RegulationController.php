@@ -19,10 +19,11 @@ class RegulationController extends Controller
     {
         $regulation = Regulation::where('slug', $slug)->first();
 
-        $file = $regulation->document;
+        $file_path = 'storage/regulation/' . $regulation->document;
 
-        $path = public_path('/storage/regulation/' . $file);
-
-        return response()->download($path);
+        return response()->download($file_path, $regulation->title . '.pdf', [
+            'Content-Type' => 'application/octet-stream',
+            'Content-Length' => filesize($file_path),
+        ])->setStatusCode(200);
     }
 }
