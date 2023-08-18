@@ -72,12 +72,10 @@
             <div class="row gy-4">
 
                 <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <a href="{{ route('bidang.detail', 1) }}">
-                        <div class="service-box blue">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>Bidang Penegakan Peraturan Perundang Undangan Daerah</h3>
-                        </div>
-                    </a>
+                    <div class="service-box blue">
+                        <i class="ri-discuss-line icon"></i>
+                        <h3>Bidang Penegakan Peraturan Perundang Undangan Daerah</h3>
+                    </div>
                 </div>
 
                 <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">

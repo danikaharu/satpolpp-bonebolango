@@ -29,7 +29,8 @@
                     <article class="entry entry-single">
 
                         <div class="entry-img">
-                            <img src="{{ Storage::url('news/' . $news->image) }}" alt="{{ $news->title }}" class="img-fluid">
+                            <img src="{{ Storage::url('news/' . $news->image) }}" alt="{{ $news->title }}"
+                                class="img-fluid">
                         </div>
 
                         <h2 class="entry-title">
@@ -38,8 +39,8 @@
 
                         <div class="entry-meta">
                             <ul>
-                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">Bidang
-                                        {{ $news->sector() }}</a></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">
+                                        Admin</a></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time
                                             datetime="{{ $news->created_at->format('d M Y H:i') }}">{{ $news->created_at->format('d M Y H:i') }}</time></a>
                                 </li>

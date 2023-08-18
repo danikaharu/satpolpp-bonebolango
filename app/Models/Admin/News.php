@@ -14,7 +14,6 @@ class News extends Model
         'slug',
         'body',
         'image',
-        'sector'
     ];
 
     public function getRouteKeyName()
