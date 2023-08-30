@@ -15,6 +15,12 @@
     <div class="page-content">
         <section class="section">
             <div class="card">
+                @if (Session::has('success'))
+                    <p class="alert alert-success">{{ Session::get('success') }}</p>
+                @endif
+                @if (Session::has('error'))
+                    <p class="alert alert-danger">{{ Session::get('error') }}</p>
+                @endif
                 <div class="card-header">
                     <a href="{{ route('news.create') }}" class="btn btn-primary mb-4">Tambah Berita</a>
                 </div>
