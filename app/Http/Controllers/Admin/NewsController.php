@@ -241,7 +241,7 @@ class NewsController extends Controller
                 if ($src) {
                     $len = strlen("http://127.0.0.1:8000/storage/news/image/");
                     $fileName = substr($src, $len, strlen($src) - $len);
-                    unlink(public_path('storage/news/image/' . $fileName));
+                    unlink(storage_path('app/public/news/image/' . $fileName));
                 }
             }
 
@@ -253,7 +253,7 @@ class NewsController extends Controller
         } catch (\Throwable $th) {
             return redirect()
                 ->route('news.index')
-                ->with('error', __('Data tidak bisa dihapus karena berelasi dengan data lain.' . $th->getMessage()));
+                ->with('error', $th->getMessage());
         }
     }
 }
