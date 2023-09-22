@@ -22,23 +22,6 @@
                         <form action="{{ route('news.update', $news->slug) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('put')
-                            <div class="form-group">
-                                <label class="font-weight-bold">Bidang</label>
-                                <select name="sector"
-                                    class="form-select form-control @error('title') is-invalid @enderror">
-                                    <option disabled selected>-- Pilih Bidang --</option>
-                                    <option value="1"
-                                        {{ isset($news) && $news->sector == '1' ? 'selected' : (old('sector') == '1' ? 'selected' : '') }}>
-                                        Penegakan Peraturan Perundang Undangan Daerah</option>
-                                </select>
-
-                                <!-- error message untuk sector -->
-                                @error('sector')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Judul Berita</label>
